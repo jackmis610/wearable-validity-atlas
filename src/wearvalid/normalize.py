@@ -62,7 +62,8 @@ def normalize(reported: dict) -> Canonical:
     if "loa_lower" in reported and "loa_upper" in reported:
         lo, hi = reported["loa_lower"], reported["loa_upper"]
         c.bias = reported.get("bias", (lo + hi) / 2.0)
-        c.precision = (hi - lo) / (2.0 * LOA_Z)
+        # SD of differences is non-negative; abs() guards against swapped limits.
+        c.precision = abs(hi - lo) / (2.0 * LOA_Z)
         c.fidelity = "exact" if "bias" in reported else "derived"
         c.notes.append(
             "Bland-Altman: bias=%.3g, SD_diff=(LoA range)/%.2f=%.3g."

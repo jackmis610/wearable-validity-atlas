@@ -20,10 +20,9 @@ from .normalize import Canonical
 # Tiers -> numeric score for aggregation across studies.
 _TIER_SCORE = {"good": 2.0, "moderate": 1.0, "poor": 0.0}
 
-# Agreement-coefficient thresholds (Lin's CCC / Koo & Li ICC conventions).
-_AGREE_GOOD, _AGREE_MOD = 0.90, 0.75
-# Below this, a single gold-standard study is enough to refute (essentially no
-# relationship to truth).
+# Below this agreement coefficient, a single gold-standard study is enough to
+# refute (essentially no relationship to truth). Tier cut-points live in
+# accuracy_from_canon (the single source of truth for good/moderate/poor).
 _AGREE_NULL = 0.40
 
 
@@ -50,52 +49,34 @@ def resolution_ratio(precision: Optional[float], swc: Optional[float]) -> Option
     return precision / swc
 
 
-def agreement_tier(c: Canonical, swc: Optional[float]):
-    """Return (tier, basis_text) using the best available statistic.
-
-    Ladder: Resolution Ratio (precision-based) > CCC/ICC > MAPE/% within > MAE.
-    """
+def _stat_source(c: Canonical, swc: Optional[float]) -> str:
+    """Human-readable description of which statistic drove the score."""
     R = resolution_ratio(c.precision, swc)
     if R is not None:
-        if R < 1:
-            return "good", "R=%.2f (<1: resolves the smallest worthwhile change)" % R
-        if R < 3:
-            return "moderate", "R=%.2f (1-3: group-level changes only)" % R
-        return "poor", "R=%.2f (>=3: random error exceeds signal)" % R
-
+        return "R=%.2f" % R
     if c.agreement is not None:
-        k = c.agreement_kind.upper()
-        if c.agreement >= _AGREE_GOOD:
-            return "good", "%s=%.2f (>=%.2f)" % (k, c.agreement, _AGREE_GOOD)
-        if c.agreement >= _AGREE_MOD:
-            return "moderate", "%s=%.2f (%.2f-%.2f)" % (k, c.agreement, _AGREE_MOD, _AGREE_GOOD)
-        return "poor", "%s=%.2f (<%.2f)" % (k, c.agreement, _AGREE_MOD)
-
+        return "%s=%.2f" % (c.agreement_kind.upper(), c.agreement)
     if c.accuracy_kind == "mape":
-        m = c.accuracy_proxy
-        if m < 5:
-            return "good", "MAPE=%.3g%% (<5%%, lossy)" % m
-        if m <= 10:
-            return "moderate", "MAPE=%.3g%% (5-10%%, lossy)" % m
-        return "poor", "MAPE=%.3g%% (>10%%, lossy)" % m
-
+        return "MAPE=%.3g%%" % c.accuracy_proxy
     if c.accuracy_kind == "pct_within":
-        p = c.accuracy_proxy
-        if p >= 66:
-            return "good", "%.3g%% within band (lossy)" % p
-        if p >= 33:
-            return "moderate", "%.3g%% within band (lossy)" % p
-        return "poor", "%.3g%% within band (lossy)" % p
-
+        return "%.3g%% within band" % c.accuracy_proxy
     if c.accuracy_kind == "mae" and swc:
-        ratio = c.accuracy_proxy / swc
-        if ratio < 1:
-            return "good", "MAE/SWC=%.2f (lossy proxy)" % ratio
-        if ratio < 3:
-            return "moderate", "MAE/SWC=%.2f (lossy proxy)" % ratio
-        return "poor", "MAE/SWC=%.2f (lossy proxy)" % ratio
+        return "MAE/SWC=%.2f" % (c.accuracy_proxy / swc)
+    return "?"
 
-    return None, "no usable agreement statistic"
+
+def agreement_tier(c: Canonical, swc: Optional[float]):
+    """Return (tier, basis_text), derived from the accuracy score.
+
+    Tier is a pure function of `accuracy_from_canon`, so the displayed number
+    and the tier can never contradict: >=80 good, 50-80 moderate, <50 poor.
+    """
+    a = accuracy_from_canon(c, swc)
+    if a is None:
+        return None, "no usable agreement statistic"
+    tier = "good" if a >= 80 else "moderate" if a >= 50 else "poor"
+    lossy = "" if c.fidelity in ("exact", "derived") else ", lossy"
+    return tier, "%s -> accuracy %.0f/100 (%s%s)" % (_stat_source(c, swc), a, tier, lossy)
 
 
 _FIDELITY_RANK = {"exact": 3, "derived": 2, "lossy": 1, "incomparable": 0, "none": -1}
@@ -119,20 +100,38 @@ def _ratio_to_score(R):
 def accuracy_from_canon(c, swc):
     """Accuracy score (0-100) for a single measurement, or None if unmeasurable.
 
-    Uses the same evidence ladder as `agreement_tier`, so an 80+ score always
-    corresponds to the 'good' tier, 50-80 to 'moderate', <50 to 'poor'.
+    This is the single source of truth: tiers are derived from it (see
+    `agreement_tier`), so a score >=80 ALWAYS means 'good', 50-80 'moderate',
+    <50 'poor'. Each statistic's mapping is anchored to its domain-conventional
+    tier cut-points: CCC/ICC 0.90 (good) & 0.75 (moderate); MAPE 5% & 10%;
+    "% within band" 66% & 33%; Resolution Ratio R 1 & 3.
     """
     R = resolution_ratio(c.precision, swc)
     if R is not None:
-        return _ratio_to_score(R)
-    if c.agreement is not None:
-        return min(100.0, max(0.0, 100 * c.agreement))
+        return _ratio_to_score(max(R, 0.0))
+    if c.agreement is not None:                       # CCC / ICC
+        v = min(1.0, max(0.0, c.agreement))
+        if v >= 0.90:
+            return 80 + 200 * (v - 0.90)              # 0.90->80, 1.00->100
+        if v >= 0.75:
+            return 50 + 200 * (v - 0.75)              # 0.75->50, 0.90->80
+        return (v / 0.75) * 50                        # 0->0, 0.75->50
     if c.accuracy_kind == "mape":
-        return min(100.0, max(0.0, 100 - 2.5 * c.accuracy_proxy))
+        m = max(0.0, c.accuracy_proxy)
+        if m <= 5:
+            return 100 - 4 * m                        # 0->100, 5->80
+        if m <= 10:
+            return 80 - 6 * (m - 5)                   # 5->80, 10->50
+        return max(0.0, 50 - 2 * (m - 10))            # 10->50, 35->0
     if c.accuracy_kind == "pct_within":
-        return min(100.0, max(0.0, c.accuracy_proxy))
+        p = min(100.0, max(0.0, c.accuracy_proxy))
+        if p >= 66:
+            return 80 + (p - 66) * (20 / 34.0)        # 66->80, 100->100
+        if p >= 33:
+            return 50 + (p - 33) * (30 / 33.0)        # 33->50, 66->80
+        return (p / 33.0) * 50                        # 0->0, 33->50
     if c.accuracy_kind == "mae" and swc:
-        return _ratio_to_score(c.accuracy_proxy / swc)
+        return _ratio_to_score(max(c.accuracy_proxy / swc, 0.0))
     return None
 
 
