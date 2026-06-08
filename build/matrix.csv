@@ -7,6 +7,10 @@ apple_watch,sleep_stages,F,1,1,lossy,,,,"Refuted. Poor agreement on adequate evi
 apple_watch,spo2,C,1,1,derived,1.6,2.1938775510204085,1.0969387755102042,"Moderate agreement on thin evidence -- insufficient to certify. 1 study(ies), 1 with gold-standard criterion; mean tier=1.00."
 apple_watch,steps,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 apple_watch,vo2max,C,1,1,lossy,,,,"Poor agreement but evidence too thin to refute outright. 1 study(ies), 1 with gold-standard criterion; mean tier=0.00."
+eight_sleep,heart_rate,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
+eight_sleep,hrv,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
+eight_sleep,sleep_duration,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
+eight_sleep,sleep_stages,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 fitbit,energy_expenditure,F,1,1,lossy,,,,"Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. 43 primary studies (via 1 source), 1 with gold-standard criterion; mean tier=0.00."
 fitbit,heart_rate,B,1,1,lossy,,,,"Moderate but adequately evidenced agreement. 32 primary studies (via 1 source), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A."
 fitbit,hrv,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.

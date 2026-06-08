@@ -1,15 +1,15 @@
 {
   "meta": {
     "version": "0.1.0",
-    "n_cells": 48,
-    "n_devices": 7,
+    "n_cells": 52,
+    "n_devices": 8,
     "n_claims": 9,
     "n_studies": 6,
     "counts": {
       "A": 0,
       "B": 5,
       "C": 3,
-      "D": 35,
+      "D": 39,
       "F": 5
     }
   },
@@ -276,6 +276,17 @@
         "sleep_duration",
         "sleep_stages"
       ]
+    },
+    {
+      "id": "eight_sleep",
+      "label": "Eight Sleep Pod",
+      "vendor": "Eight Sleep",
+      "markets": [
+        "heart_rate",
+        "hrv",
+        "sleep_duration",
+        "sleep_stages"
+      ]
     }
   ],
   "cells": [
@@ -419,6 +430,70 @@
       "bases": [
         "sensors_mdpi2025 (graded exercise): MAPE=15.8% -> accuracy 38/100 (poor, lossy) [cpet_metabolic_cart, lossy]"
       ]
+    },
+    {
+      "device": "eight_sleep",
+      "claim": "heart_rate",
+      "grade": "D",
+      "rationale": "Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.",
+      "n_studies": 0,
+      "n_underlying": 0,
+      "n_goodquality": 0,
+      "best_fidelity": "none",
+      "bias": null,
+      "precision": null,
+      "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
+      "bases": []
+    },
+    {
+      "device": "eight_sleep",
+      "claim": "hrv",
+      "grade": "D",
+      "rationale": "Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.",
+      "n_studies": 0,
+      "n_underlying": 0,
+      "n_goodquality": 0,
+      "best_fidelity": "none",
+      "bias": null,
+      "precision": null,
+      "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
+      "bases": []
+    },
+    {
+      "device": "eight_sleep",
+      "claim": "sleep_duration",
+      "grade": "D",
+      "rationale": "Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.",
+      "n_studies": 0,
+      "n_underlying": 0,
+      "n_goodquality": 0,
+      "best_fidelity": "none",
+      "bias": null,
+      "precision": null,
+      "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
+      "bases": []
+    },
+    {
+      "device": "eight_sleep",
+      "claim": "sleep_stages",
+      "grade": "D",
+      "rationale": "Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.",
+      "n_studies": 0,
+      "n_underlying": 0,
+      "n_goodquality": 0,
+      "best_fidelity": "none",
+      "bias": null,
+      "precision": null,
+      "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
+      "bases": []
     },
     {
       "device": "fitbit",

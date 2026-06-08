@@ -4,11 +4,11 @@
 
 ## Headline
 
-- **48** device×claim cells graded across **7** devices.
+- **52** device×claim cells graded across **8** devices.
 
 - Grade A (established valid): **0**. Grade B or better: **5** (10%).
 
-- Unvalidated-but-marketed (**D**): 35 · Refuted (**F**): 5.
+- Unvalidated-but-marketed (**D**): 39 · Refuted (**F**): 5.
 
 
 ![heatmap](heatmap.svg)
@@ -25,17 +25,17 @@
 
 ## Matrix
 
-| Claim | Apple Watch | Garmin Fenix | Fitbit | WHOOP | Oura Ring | Polar (Grit X / Vantage) | Samsung Galaxy Watch |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **Heart rate** | 🟡 B | 🟡 B | 🟡 B | 🟠 D | 🟠 D | 🟠 D | 🟠 D |
-| **VO2max (cardiorespiratory fitness)** | ⚪ C | 🟡 B | · | · | · | 🟠 D | 🟠 D |
-| **Heart rate variability** | 🟠 D | 🟠 D | 🟠 D | 🟠 D | 🟡 B | ⚪ C | 🟠 D |
-| **Blood oxygen (SpO2)** | ⚪ C | 🔴 F | 🟠 D | · | 🟠 D | · | 🟠 D |
-| **Blood pressure (cuffless)** | · | · | · | · | · | · | 🟠 D |
-| **Energy expenditure (calories)** | 🔴 F | 🟠 D | 🔴 F | 🟠 D | · | 🟠 D | 🟠 D |
-| **Step count** | 🟠 D | 🟠 D | 🟠 D | · | · | 🟠 D | 🟠 D |
-| **Total sleep time** | 🔴 F | 🟠 D | 🟠 D | 🟠 D | 🟠 D | 🟠 D | 🟠 D |
-| **Sleep staging** | 🔴 F | 🟠 D | 🟠 D | 🟠 D | 🟠 D | · | 🟠 D |
+| Claim | Apple Watch | Garmin Fenix | Fitbit | WHOOP | Oura Ring | Polar (Grit X / Vantage) | Samsung Galaxy Watch | Eight Sleep Pod |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Heart rate** | 🟡 B | 🟡 B | 🟡 B | 🟠 D | 🟠 D | 🟠 D | 🟠 D | 🟠 D |
+| **VO2max (cardiorespiratory fitness)** | ⚪ C | 🟡 B | · | · | · | 🟠 D | 🟠 D | · |
+| **Heart rate variability** | 🟠 D | 🟠 D | 🟠 D | 🟠 D | 🟡 B | ⚪ C | 🟠 D | 🟠 D |
+| **Blood oxygen (SpO2)** | ⚪ C | 🔴 F | 🟠 D | · | 🟠 D | · | 🟠 D | · |
+| **Blood pressure (cuffless)** | · | · | · | · | · | · | 🟠 D | · |
+| **Energy expenditure (calories)** | 🔴 F | 🟠 D | 🔴 F | 🟠 D | · | 🟠 D | 🟠 D | · |
+| **Step count** | 🟠 D | 🟠 D | 🟠 D | · | · | 🟠 D | 🟠 D | · |
+| **Total sleep time** | 🔴 F | 🟠 D | 🟠 D | 🟠 D | 🟠 D | 🟠 D | 🟠 D | 🟠 D |
+| **Sleep staging** | 🔴 F | 🟠 D | 🟠 D | 🟠 D | 🟠 D | · | 🟠 D | 🟠 D |
 
 ## Audit trail (per-cell rationale)
 

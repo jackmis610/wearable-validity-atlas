@@ -40,3 +40,10 @@
   label: Samsung Galaxy Watch
   vendor: Samsung
   markets: [heart_rate, vo2max, hrv, spo2, blood_pressure, energy_expenditure, steps, sleep_duration, sleep_stages]
+
+- id: eight_sleep
+  label: Eight Sleep Pod
+  vendor: Eight Sleep
+  # Under-mattress (ballistocardiography) sensor; markets HR, HRV, and sleep
+  # staging. No independent criterion-validation study located -> all Grade D.
+  markets: [heart_rate, hrv, sleep_duration, sleep_stages]
