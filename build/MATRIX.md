@@ -43,49 +43,49 @@ Every non-trivial verdict, with the evidence it was computed from.
 
 ### Apple Watch — Heart rate · **Grade B**
 
-**Accuracy** 82.9/100 · **Confidence** 69/100
+**Accuracy** 82.9/100 · **Confidence** 65/100
 
-Good agreement but limited evidence. n=1 study(ies), 1 with gold-standard criterion; mean tier=2.00. Evidence is lossy-only (no decomposable precision), so capped below A.
+Good agreement on broad but lossy evidence (summary statistics only). 32 primary studies (via 1 source), 1 with gold-standard criterion; mean tier=2.00. Evidence is lossy-only (no decomposable precision), so capped below A.
 
-- fuller2020 (rest / low intensity): 71% within band -> accuracy 83/100 (good, lossy) [ecg, lossy]
+- fuller2020 [systematic review of 32 studies] (rest / low intensity): 71% within band -> accuracy 83/100 (good, lossy) [ecg, lossy]
 
 ### Fitbit — Heart rate · **Grade B**
 
-**Accuracy** 66.4/100 · **Confidence** 69/100
+**Accuracy** 66.4/100 · **Confidence** 65/100
 
-Moderate but adequately evidenced agreement. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.
+Moderate but adequately evidenced agreement. 32 primary studies (via 1 source), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.
 
-- fuller2020 (rest / low intensity): 51% within band -> accuracy 66/100 (moderate, lossy) [ecg, lossy]
+- fuller2020 [systematic review of 32 studies] (rest / low intensity): 51% within band -> accuracy 66/100 (moderate, lossy) [ecg, lossy]
 
 ### Garmin Fenix — Heart rate · **Grade B**
 
-**Accuracy** 64.5/100 · **Confidence** 69/100
+**Accuracy** 64.5/100 · **Confidence** 65/100
 
-Moderate but adequately evidenced agreement. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.
+Moderate but adequately evidenced agreement. 32 primary studies (via 1 source), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.
 
-- fuller2020 (rest / low intensity): 49% within band -> accuracy 65/100 (moderate, lossy) [ecg, lossy]
+- fuller2020 [systematic review of 32 studies] (rest / low intensity): 49% within band -> accuracy 65/100 (moderate, lossy) [ecg, lossy]
 
 ### Oura Ring — Heart rate variability · **Grade B**
 
 **Accuracy** 98/100 · **Confidence** 49/100
 
-Good agreement but limited evidence. n=1 study(ies), 1 with gold-standard criterion; mean tier=2.00. Evidence is lossy-only (no decomposable precision), so capped below A.
+Good agreement but limited or unreplicated evidence. 1 study(ies), 1 with gold-standard criterion; mean tier=2.00. Evidence is lossy-only (no decomposable precision), so capped below A.
 
 - hrv_dial2025 (overnight): CCC=0.99 -> accuracy 98/100 (good, lossy) [ecg, lossy]
 
 ### Garmin Fenix — VO2max (cardiorespiratory fitness) · **Grade B**
 
-**Accuracy** 67.7/100 · **Confidence** 69/100
+**Accuracy** 67.7/100 · **Confidence** 59/100
 
-Moderate but adequately evidenced agreement. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.
+Moderate but adequately evidenced agreement. 13 primary studies (via 1 source), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.
 
-- vo2max_frontiers2025 (graded exercise / free-living): MAPE=7.05% -> accuracy 68/100 (moderate, lossy) [cpet_metabolic_cart, lossy]
+- vo2max_frontiers2025 [systematic review of 13 studies] (graded exercise / free-living): MAPE=7.05% -> accuracy 68/100 (moderate, lossy) [cpet_metabolic_cart, lossy]
 
 ### Polar (Grit X / Vantage) — Heart rate variability · **Grade C**
 
 **Accuracy** 64/100 · **Confidence** 49/100
 
-Moderate agreement on thin evidence -- insufficient to certify. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.
+Moderate agreement on thin evidence -- insufficient to certify. 1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.
 
 - hrv_dial2025 (overnight): CCC=0.82 -> accuracy 64/100 (moderate, lossy) [ecg, lossy]
 
@@ -93,7 +93,7 @@ Moderate agreement on thin evidence -- insufficient to certify. n=1 study(ies), 
 
 **Accuracy** 78.5/100 · **Confidence** 61/100
 
-Moderate agreement on thin evidence -- insufficient to certify. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00.
+Moderate agreement on thin evidence -- insufficient to certify. 1 study(ies), 1 with gold-standard criterion; mean tier=1.00.
 
 `bias=1.6, precision(SD_diff)=2.19, Resolution Ratio R=1.10`
 
@@ -103,48 +103,48 @@ Moderate agreement on thin evidence -- insufficient to certify. n=1 study(ies), 
 
 **Accuracy** 38.4/100 · **Confidence** 49/100
 
-Poor agreement but evidence too thin to refute outright. n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.
+Poor agreement but evidence too thin to refute outright. 1 study(ies), 1 with gold-standard criterion; mean tier=0.00.
 
 - sensors_mdpi2025 (graded exercise): MAPE=15.8% -> accuracy 38/100 (poor, lossy) [cpet_metabolic_cart, lossy]
 
 ### Apple Watch — Energy expenditure (calories) · **Grade F**
 
-**Accuracy** 16.7/100 · **Confidence** 89/100
+**Accuracy** 16.7/100 · **Confidence** 91/100
 
-Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. n=2 study(ies), 2 with gold-standard criterion; mean tier=0.00.
+Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. 44 primary studies (via 2 sources), 2 with gold-standard criterion; mean tier=0.00.
 
-- applewatch_npj2026 (mixed activity): 9% within band -> accuracy 14/100 (poor, lossy) [indirect_calorimetry, lossy]
-- fuller2020 (mixed activity): 13% within band -> accuracy 20/100 (poor, lossy) [indirect_calorimetry, lossy]
+- applewatch_npj2026 [systematic review, 82-study pool] (mixed activity): 9% within band -> accuracy 14/100 (poor, lossy) [indirect_calorimetry, lossy]
+- fuller2020 [systematic review of 43 studies] (mixed activity): 13% within band -> accuracy 20/100 (poor, lossy) [indirect_calorimetry, lossy]
 
 ### Fitbit — Energy expenditure (calories) · **Grade F**
 
-**Accuracy** 13.9/100 · **Confidence** 69/100
+**Accuracy** 13.9/100 · **Confidence** 71/100
 
-Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.
+Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. 43 primary studies (via 1 source), 1 with gold-standard criterion; mean tier=0.00.
 
-- fuller2020 (mixed activity): 9.2% within band -> accuracy 14/100 (poor, lossy) [indirect_calorimetry, lossy]
+- fuller2020 [systematic review of 43 studies] (mixed activity): 9.2% within band -> accuracy 14/100 (poor, lossy) [indirect_calorimetry, lossy]
 
 ### Apple Watch — Total sleep time · **Grade F**
 
-**Accuracy** 48/100 · **Confidence** 69/100
+**Accuracy** 48/100 · **Confidence** 71/100
 
-Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.
+Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. 95 primary studies (via 1 source), 1 with gold-standard criterion; mean tier=0.00.
 
-- keepingpace2024 (overnight): MAPE=11% -> accuracy 48/100 (poor, lossy) [psg, lossy]
+- keepingpace2024 [umbrella review of 95 studies] (overnight): MAPE=11% -> accuracy 48/100 (poor, lossy) [psg, lossy]
 
 ### Apple Watch — Sleep staging · **Grade F**
 
-**Accuracy** 0/100 · **Confidence** 69/100
+**Accuracy** 0/100 · **Confidence** 71/100
 
-Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.
+Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. 95 primary studies (via 1 source), 1 with gold-standard criterion; mean tier=0.00.
 
-- keepingpace2024 (overnight): MAPE=60% -> accuracy 0/100 (poor, lossy) [psg, lossy]
+- keepingpace2024 [umbrella review of 95 studies] (overnight): MAPE=60% -> accuracy 0/100 (poor, lossy) [psg, lossy]
 
 ### Garmin Fenix — Blood oxygen (SpO2) · **Grade F**
 
 **Accuracy** 6.7/100 · **Confidence** 49/100
 
-Refuted. A gold-standard study shows essentially no agreement (coefficient < 0.40). n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.
+Refuted. A gold-standard study shows essentially no agreement (coefficient < 0.40). 1 study(ies), 1 with gold-standard criterion; mean tier=0.00.
 
 - sensors_mdpi2025 (rest): CCC=0.10 -> accuracy 7/100 (poor, lossy) [co_oximetry, lossy]
 

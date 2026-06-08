@@ -326,7 +326,7 @@
     if(c.bias!=null)kv.push(['Bias',(+c.bias).toPrecision(3)]);
     if(c.precision!=null)kv.push(['Precision (SD)',(+c.precision).toPrecision(3)]);
     if(c.resolution_ratio!=null)kv.push(['Resolution R',(+c.resolution_ratio).toFixed(2)]);
-    if(c.n_studies)kv.push(['Studies',c.n_studies]);
+    if(c.n_underlying)kv.push(['Validation studies', c.n_underlying>c.n_studies?`${c.n_underlying} (via ${c.n_studies} source${c.n_studies>1?'s':''})`:c.n_underlying]);
     if(c.best_fidelity&&c.best_fidelity!=='none')kv.push(['Evidence fidelity',c.best_fidelity]);
     if(kv.length)body+='<div class="kvs">'+kv.map(([k,v])=>`<div class="kv"><div class="k">${k}</div><div class="val">${v}</div></div>`).join('')+'</div>';
     if(c.bases&&c.bases.length){

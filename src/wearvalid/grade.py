@@ -32,7 +32,8 @@ class CellVerdict:
     claim: str
     grade: str                      # A | B | C | D | F | N
     rationale: str
-    n_studies: int = 0
+    n_studies: int = 0            # number of records (a review counts as one record)
+    n_underlying: int = 0         # primary studies those records actually pool
     n_goodquality: int = 0
     best_fidelity: str = "none"
     bias: Optional[float] = None
@@ -188,7 +189,9 @@ def grade_cell(device_id, claim, measurements, swc, marketed=False) -> CellVerdi
         if _FIDELITY_RANK[m["canon"].fidelity] > _FIDELITY_RANK[best_fid]:
             best_fid = m["canon"].fidelity
 
+    n_underlying = sum(m.get("underlying", 1) for m in indep)
     v.n_studies = len(indep)
+    v.n_underlying = n_underlying
     v.n_goodquality = n_gold
     v.best_fidelity = best_fid
     v.bases = bases
@@ -226,15 +229,25 @@ def grade_cell(device_id, claim, measurements, swc, marketed=False) -> CellVerdi
         conf += 20                    # replication with a gold criterion
     elif len(indep) >= 2:
         conf += 8                     # replication without a gold criterion
-    if gold_review:
-        conf += 20                    # pooled across many primary studies
+    # evidence breadth: how many primary studies actually underlie this grade
+    if n_underlying >= 40:
+        conf += 22
+    elif n_underlying >= 15:
+        conf += 16
+    elif n_underlying >= 5:
+        conf += 10
+    elif n_underlying >= 2:
+        conf += 5
     conf += _FIDELITY_CONF[best_fid]  # decomposable evidence is worth more
     conf += -10 if (has_good and has_poor) else 8   # consistency
     v.confidence_score = float(max(0, min(100, round(conf))))
 
     fid_note = "" if not lossy_only else " Evidence is lossy-only (no decomposable precision), so capped below A."
-    summary = "n=%d study(ies), %d with gold-standard criterion; mean tier=%.2f." % (
-        len(indep), n_gold, mean)
+    studies_phrase = ("%d primary studies (via %d source%s)" % (
+        n_underlying, len(indep), "" if len(indep) == 1 else "s")
+        if n_underlying > len(indep) else "%d study(ies)" % len(indep))
+    summary = "%s, %d with gold-standard criterion; mean tier=%.2f." % (
+        studies_phrase, n_gold, mean)
 
     # --- Decision (deterministic) -------------------------------------------
     if null_gold_hit:
@@ -252,7 +265,10 @@ def grade_cell(device_id, claim, measurements, swc, marketed=False) -> CellVerdi
             v.rationale = "Established valid. Consistent good agreement on replicated, decomposable evidence. " + summary
         else:
             v.grade = "B"
-            v.rationale = ("Good agreement but limited evidence. %s%s" % (summary, fid_note))
+            lead = ("Good agreement on broad but lossy evidence (summary statistics only)."
+                    if lossy_only and n_underlying >= 5
+                    else "Good agreement but limited or unreplicated evidence.")
+            v.rationale = "%s %s%s" % (lead, summary, fid_note)
     elif mean >= 1.0:
         if strong:
             v.grade = "B"

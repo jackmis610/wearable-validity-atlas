@@ -4,10 +4,12 @@ url: https://pmc.ncbi.nlm.nih.gov/articles/PMC12748164/
 year: 2025
 tier: systematic_review
 independent: true
+pooled_studies: 13             # 13 studies met inclusion (of 252 screened)
 notes: "7 of 13 device estimates judged valid; lactate-threshold validation sparse."
 measurements:
   - device: garmin_fenix
     claim: vo2max
     condition: graded exercise / free-living
     criterion: cpet_metabolic_cart
+    n_underlying: 13
     reported: { mape: 7.05 }

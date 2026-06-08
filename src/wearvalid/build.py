@@ -62,17 +62,30 @@ def collect_measurements(claims, studies):
     """Group normalized measurements by (device, claim)."""
     cells = defaultdict(list)
     for st in studies:
-        is_review = st.get("tier") in ("systematic_review", "umbrella_review")
+        tier = st.get("tier", "primary")
+        is_review = tier in ("systematic_review", "umbrella_review")
+        kind = "umbrella review" if tier == "umbrella_review" else "systematic review"
+        pooled = st.get("pooled_studies")
         for m in st.get("measurements", []):
             claim = claims[m["claim"]]
             canon = normalize(m["reported"])
+            n_und = m.get("n_underlying") or 1
+            if not is_review:
+                scope = ""
+            elif m.get("n_underlying"):
+                scope = " [%s of %d studies]" % (kind, n_und)
+            elif pooled:
+                scope = " [%s, %d-study pool]" % (kind, pooled)
+            else:
+                scope = " [%s]" % kind
             cells[(m["device"], m["claim"])].append({
                 "canon": canon,
                 "independent": st.get("independent", True),
                 "criterion": m.get("criterion", "unspecified"),
                 "is_gold": m.get("criterion") in claim.get("gold_criteria", []),
                 "is_review": is_review,
-                "label": "%s (%s)" % (st["id"], m.get("condition", "n/a")),
+                "underlying": n_und,
+                "label": "%s%s (%s)" % (st["id"], scope, m.get("condition", "n/a")),
                 "study": st["id"],
             })
     return cells
@@ -198,6 +211,7 @@ def _verdict_to_dict(v):
     return {
         "device": v.device, "claim": v.claim, "grade": v.grade,
         "rationale": v.rationale, "n_studies": v.n_studies,
+        "n_underlying": v.n_underlying,
         "n_goodquality": v.n_goodquality, "best_fidelity": v.best_fidelity,
         "bias": v.bias, "precision": v.precision,
         "resolution_ratio": v.resolution_ratio,

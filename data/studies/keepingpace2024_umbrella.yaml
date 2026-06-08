@@ -4,20 +4,25 @@ url: https://link.springer.com/article/10.1007/s40279-024-02077-2
 year: 2024
 tier: umbrella_review
 independent: true
+pooled_studies: 249            # overall: 24 systematic reviews / 249 studies / 430,465 participants
+pooled_participants: 430465
 notes: >
   24 systematic reviews / 249 non-duplicate validation studies / 430,465 participants.
   Coverage: only 34 of 310 released devices (11%) validated for >=1 metric; ~3.5% of
   device x metric combinations covered; 75/249 studies used both a gold-standard
-  criterion and adequate statistics. Sleep figures attributed to the most-covered
-  consumer device as representative.
+  criterion and adequate statistics. Sleep specifically: 4 reviews pooling 95 primary
+  studies (2,985 participants). Sleep figures attributed to the most-covered consumer
+  device as representative.
 measurements:
   - device: apple_watch
     claim: sleep_duration
     condition: overnight
     criterion: psg
+    n_underlying: 95           # 4 sleep reviews pooled 95 primary studies
     reported: { mape: 11 }            # total sleep time MAPE > 10%
   - device: apple_watch
     claim: sleep_stages
     condition: overnight
     criterion: psg
+    n_underlying: 95
     reported: { mape: 60 }            # WASO error spanned 12-180%; representative midpoint

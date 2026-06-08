@@ -4,30 +4,37 @@ url: https://mhealth.jmir.org/2020/9/e18694/
 year: 2020
 tier: systematic_review        # pools many primary studies -> adequate evidence
 independent: true
-notes: "Search window through May 2019; figures are % of comparisons within 3% of criterion."
+pooled_studies: 169            # 158 publications, 169 studies/substudies
+pooled_participants: 5934
+notes: "Search window through May 2019; figures are % of comparisons within 3% of criterion. Per-metric study counts: heart rate 32, energy expenditure 43, steps 126."
 measurements:
   - device: apple_watch
     claim: heart_rate
     condition: rest / low intensity
     criterion: ecg
+    n_underlying: 32           # HR validation studies pooled
     reported: { pct_within_band: 71 }
   - device: fitbit
     claim: heart_rate
     condition: rest / low intensity
     criterion: ecg
+    n_underlying: 32
     reported: { pct_within_band: 51 }
   - device: garmin_fenix
     claim: heart_rate
     condition: rest / low intensity
     criterion: ecg
+    n_underlying: 32
     reported: { pct_within_band: 49 }
   - device: apple_watch
     claim: energy_expenditure
     condition: mixed activity
     criterion: indirect_calorimetry
+    n_underlying: 43           # EE validation studies pooled
     reported: { pct_within_band: 13 }   # no brand exceeded ~13% within-band
   - device: fitbit
     claim: energy_expenditure
     condition: mixed activity
     criterion: indirect_calorimetry
+    n_underlying: 43
     reported: { pct_within_band: 9.2 }  # pooled within-band rate across devices

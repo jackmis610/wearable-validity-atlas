@@ -4,7 +4,9 @@ url: https://pmc.ncbi.nlm.nih.gov/articles/PMC12823594/
 year: 2026
 tier: systematic_review
 independent: true
-notes: "Apple-Watch-specific living meta-analysis; energy expenditure remained the weakest metric."
+pooled_studies: 82             # 82 studies, 430,052 participants (all metrics)
+pooled_participants: 430052
+notes: "Apple-Watch-specific living meta-analysis; energy expenditure remained the weakest metric. Pooled total is across all metrics; no EE-specific count assigned to this measurement."
 measurements:
   - device: apple_watch
     claim: energy_expenditure
