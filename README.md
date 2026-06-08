@@ -152,10 +152,15 @@ A **Grade D** means "no study in *this corpus* yet," not "no study exists." Next
 
 ## Author
 
-Built by **Jack Mislinski** — exercise physiologist (MSc) with hands-on
-criterion-validation experience (CPET / metabolic-cart vs. Douglas-bag
-validation). The Atlas applies clinical measurement-science standards to the
-consumer wearable field, from someone who has actually run the reference methods.
+Built by **Jack Mislinski** — exercise physiologist (MSc) and endurance coach.
+I run cardiopulmonary exercise testing (CPET) and have done hands-on criterion
+validation in the lab, including a metabolic-cart-vs-Douglas-bag comparison — i.e.
+I've actually operated the reference methods these devices are measured against.
+The Atlas brings clinical measurement-science standards (trueness vs. precision,
+smallest worthwhile change, criterion ceilings) to the consumer wearable field.
+
+<!-- TODO: fill these in before sharing -->
+**Links:** [Funspan newsletter](https://funspan.com) · [X / @yourhandle](https://x.com/) · [jackmislinski.com](https://) 
 
 ## License
 
