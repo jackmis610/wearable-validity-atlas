@@ -1,0 +1,13 @@
+id: applewatch_npj2026
+citation: "The accuracy of Apple Watch measurements: a living systematic review and meta-analysis. npj Digital Medicine (living, updated 2026)."
+url: https://pmc.ncbi.nlm.nih.gov/articles/PMC12823594/
+year: 2026
+tier: systematic_review
+independent: true
+notes: "Apple-Watch-specific living meta-analysis; energy expenditure remained the weakest metric."
+measurements:
+  - device: apple_watch
+    claim: energy_expenditure
+    condition: mixed activity
+    criterion: indirect_calorimetry
+    reported: { pct_within_band: 9 }   # ~9% of comparisons within 3%

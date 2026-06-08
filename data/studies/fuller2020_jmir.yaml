@@ -1,0 +1,33 @@
+id: fuller2020
+citation: "Fuller D, et al. Reliability and validity of commercially available wearables. JMIR Mhealth Uhealth 2020;8(9):e18694."
+url: https://mhealth.jmir.org/2020/9/e18694/
+year: 2020
+tier: systematic_review        # pools many primary studies -> adequate evidence
+independent: true
+notes: "Search window through May 2019; figures are % of comparisons within 3% of criterion."
+measurements:
+  - device: apple_watch
+    claim: heart_rate
+    condition: rest / low intensity
+    criterion: ecg
+    reported: { pct_within_band: 71 }
+  - device: fitbit
+    claim: heart_rate
+    condition: rest / low intensity
+    criterion: ecg
+    reported: { pct_within_band: 51 }
+  - device: garmin_fenix
+    claim: heart_rate
+    condition: rest / low intensity
+    criterion: ecg
+    reported: { pct_within_band: 49 }
+  - device: apple_watch
+    claim: energy_expenditure
+    condition: mixed activity
+    criterion: indirect_calorimetry
+    reported: { pct_within_band: 13 }   # no brand exceeded ~13% within-band
+  - device: fitbit
+    claim: energy_expenditure
+    condition: mixed activity
+    criterion: indirect_calorimetry
+    reported: { pct_within_band: 9.2 }  # pooled within-band rate across devices

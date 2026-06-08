@@ -1,0 +1,18 @@
+id: hrv_dial2025
+citation: "Dial MB, et al. Validity of consumer wearables for nocturnal HRV. Physiological Reports 2025;13:e70xxx."
+url: https://pmc.ncbi.nlm.nih.gov/articles/PMC12367097/
+year: 2025
+tier: primary
+independent: true
+notes: "Nocturnal HRV vs ECG; agreement strongly device-specific (Oura, WHOOP > Garmin, Polar)."
+measurements:
+  - device: oura
+    claim: hrv
+    condition: overnight
+    criterion: ecg
+    reported: { ccc: 0.99 }            # Oura Gen 4
+  - device: polar
+    claim: hrv
+    condition: overnight
+    criterion: ecg
+    reported: { ccc: 0.82 }            # Polar Grit X Pro

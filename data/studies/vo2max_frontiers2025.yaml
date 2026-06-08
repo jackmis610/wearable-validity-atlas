@@ -1,0 +1,13 @@
+id: vo2max_frontiers2025
+citation: "Accuracy of wearables for determining maximal oxygen uptake and lactate threshold: a systematic review. Front Sports Act Living 2025."
+url: https://pmc.ncbi.nlm.nih.gov/articles/PMC12748164/
+year: 2025
+tier: systematic_review
+independent: true
+notes: "7 of 13 device estimates judged valid; lactate-threshold validation sparse."
+measurements:
+  - device: garmin_fenix
+    claim: vo2max
+    condition: graded exercise / free-living
+    criterion: cpet_metabolic_cart
+    reported: { mape: 7.05 }

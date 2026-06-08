@@ -1,0 +1,78 @@
+# Catalogue of physiological claims wearables make.
+#
+# validatable: true  -> a physical quantity with an external gold-standard criterion
+#                       (can be assessed for measurement accuracy).
+# validatable: false -> a proprietary composite (Readiness/Recovery/Strain/etc.)
+#                       with no external criterion -> graded N by definition.
+# gold_criteria: reference methods that count as a true criterion for this claim.
+
+- id: heart_rate
+  label: Heart rate
+  validatable: true
+  gold_criteria: [ecg, chest_strap_ecg]
+
+- id: vo2max
+  label: VO2max (cardiorespiratory fitness)
+  validatable: true
+  gold_criteria: [cpet_metabolic_cart, douglas_bag]
+
+- id: hrv
+  label: Heart rate variability
+  validatable: true
+  gold_criteria: [ecg, chest_strap_ecg]
+
+- id: spo2
+  label: Blood oxygen (SpO2)
+  validatable: true
+  gold_criteria: [co_oximetry, arterial_blood_gas]
+
+- id: blood_pressure
+  label: Blood pressure (cuffless)
+  validatable: true
+  gold_criteria: [arterial_line, validated_cuff]
+
+- id: energy_expenditure
+  label: Energy expenditure (calories)
+  validatable: true
+  gold_criteria: [indirect_calorimetry, doubly_labeled_water]
+
+- id: steps
+  label: Step count
+  validatable: true
+  gold_criteria: [direct_observation, video]
+
+- id: sleep_duration
+  label: Total sleep time
+  validatable: true
+  gold_criteria: [psg]
+
+- id: sleep_stages
+  label: Sleep staging
+  validatable: true
+  gold_criteria: [psg]
+
+# --- Proprietary composite scores: no external criterion (graded N) ----------
+- id: readiness
+  label: Readiness score
+  validatable: false
+  gold_criteria: []
+
+- id: recovery
+  label: Recovery score
+  validatable: false
+  gold_criteria: []
+
+- id: strain
+  label: Strain / training load score
+  validatable: false
+  gold_criteria: []
+
+- id: stress
+  label: Stress score
+  validatable: false
+  gold_criteria: []
+
+- id: body_battery
+  label: Body Battery / energy score
+  validatable: false
+  gold_criteria: []

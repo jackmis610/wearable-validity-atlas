@@ -1,0 +1,23 @@
+id: sensors_mdpi2025
+citation: "Validation of consumer wearables for cardiorespiratory and SpO2 measures. MDPI Sensors 2025;25(1):275."
+url: https://www.mdpi.com/1424-8220/25/1/275
+year: 2025
+tier: primary
+independent: true
+notes: "Single-cohort criterion validation (n ~ 13-19)."
+measurements:
+  - device: apple_watch
+    claim: vo2max
+    condition: graded exercise
+    criterion: cpet_metabolic_cart
+    reported: { bias: -4.51, mape: 15.78 }   # Series 7 underestimated VO2max
+  - device: garmin_fenix
+    claim: spo2
+    condition: rest
+    criterion: co_oximetry
+    reported: { ccc: 0.10 }                   # essentially no agreement
+  - device: apple_watch
+    claim: spo2
+    condition: rest
+    criterion: co_oximetry
+    reported: { loa_lower: -2.7, loa_upper: 5.9 }   # Series 6, % SpO2

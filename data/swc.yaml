@@ -1,0 +1,78 @@
+# Smallest Worthwhile Change (SWC) anchors + criterion ceilings.
+#
+# These are the editorial heart of the methodology. The Resolution Ratio
+# R = device_precision / swc decides whether a device can resolve a change worth
+# acting on. Each value is a stated, defensible position -- challenge and PRs
+# welcome. `criterion_ceiling` records the reference method's own error: a device
+# cannot be more valid than the criterion is reliable.
+#
+# units: native units of the metric. swc: null => grade falls back to agreement
+# coefficients (CCC/ICC) because no defensible absolute SWC exists.
+
+heart_rate:
+  unit: bpm
+  swc: 3
+  rationale: >
+    ~3 bpm approximates the day-to-day biological noise floor of resting HR and
+    a training-zone-relevant increment; finer resolution is not actionable.
+  criterion_ceiling: "ECG ~+/-1 bpm"
+
+vo2max:
+  unit: mL/kg/min
+  swc: 1.5
+  rationale: >
+    ~3% of a typical 40-50 mL/kg/min value (~1.5 mL/kg/min), matching the
+    smallest change a coach would act on and roughly the CPET test-retest band.
+  criterion_ceiling: "CPET (metabolic cart / Douglas bag) test-retest ~3-4% -- a device cannot beat this."
+
+hrv:
+  unit: ms
+  swc: null
+  rationale: >
+    Within-subject RMSSD varies enormously day to day; no single absolute SWC
+    generalizes. Grade falls back to agreement coefficients (CCC/ICC) vs ECG.
+  criterion_ceiling: "ECG R-R interval (near-perfect when artifact-corrected)"
+
+spo2:
+  unit: "%SpO2"
+  swc: 2
+  rationale: >
+    ~2% spans the clinically meaningful desaturation step and aligns with the
+    +/-2% accuracy expected of medical pulse oximeters.
+  criterion_ceiling: "Co-oximetry / arterial blood gas ~+/-1-2%"
+
+blood_pressure:
+  unit: mmHg
+  swc: 5
+  rationale: >
+    ~5 mmHg is the AAMI/ISO mean-difference tolerance for validated cuffs and a
+    clinically meaningful systolic increment.
+  criterion_ceiling: "Intra-arterial line / validated auscultatory cuff ~+/-5 mmHg"
+
+energy_expenditure:
+  unit: "%"
+  swc: 5
+  rationale: >
+    Errors are reported in percent of total expenditure; ~5% is the threshold
+    below which calorie estimates are decision-useful for body-weight goals.
+  criterion_ceiling: "Indirect calorimetry / doubly labeled water ~5-8%"
+
+steps:
+  unit: "%"
+  swc: 5
+  rationale: "~5% step-count error is the practical threshold for activity tracking."
+  criterion_ceiling: "Direct observation / video ~near-perfect"
+
+sleep_duration:
+  unit: min
+  swc: 30
+  rationale: "~30 min total-sleep-time error is the threshold for night-to-night usefulness."
+  criterion_ceiling: "Polysomnography (PSG) ~ minutes"
+
+sleep_stages:
+  unit: "%epoch"
+  swc: null
+  rationale: >
+    Staging is categorical (epoch agreement), not a continuous quantity, so no
+    SWC applies; grade uses epoch-agreement / error statistics directly.
+  criterion_ceiling: "PSG inter-scorer agreement only ~80% of epochs -- the realistic ceiling."

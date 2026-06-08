@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1158" height="668" font-family="-apple-system,Segoe UI,Roboto,sans-serif">
+<rect width="1158" height="668" fill="white"/>
+<text x="12" y="26" font-size="18" font-weight="700">Wearable Validity Matrix</text>
+<text x="288" y="78" font-size="12" font-weight="600" text-anchor="middle">Apple Watch</text>
+<text x="420" y="78" font-size="12" font-weight="600" text-anchor="middle">Garmin Fenix</text>
+<text x="552" y="78" font-size="12" font-weight="600" text-anchor="middle">Fitbit</text>
+<text x="684" y="78" font-size="12" font-weight="600" text-anchor="middle">WHOOP</text>
+<text x="816" y="78" font-size="12" font-weight="600" text-anchor="middle">Oura Ring</text>
+<text x="948" y="78" font-size="12" font-weight="600" text-anchor="middle">Polar (Grit X / Vantage)</text>
+<text x="1080" y="78" font-size="12" font-weight="600" text-anchor="middle">Samsung Galaxy Watch</text>
+<text x="214" y="120" font-size="12" text-anchor="end">Heart rate</text>
+<rect x="222" y="96" width="132" height="40" fill="#a6d96a" stroke="white" stroke-width="2"/>
+<text x="288" y="121" font-size="14" font-weight="700" text-anchor="middle" fill="#222">B</text>
+<rect x="354" y="96" width="132" height="40" fill="#a6d96a" stroke="white" stroke-width="2"/>
+<text x="420" y="121" font-size="14" font-weight="700" text-anchor="middle" fill="#222">B</text>
+<rect x="486" y="96" width="132" height="40" fill="#a6d96a" stroke="white" stroke-width="2"/>
+<text x="552" y="121" font-size="14" font-weight="700" text-anchor="middle" fill="#222">B</text>
+<rect x="618" y="96" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="684" y="121" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="750" y="96" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="816" y="121" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="882" y="96" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="948" y="121" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="1014" y="96" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="1080" y="121" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<text x="214" y="160" font-size="12" text-anchor="end">VO2max (cardiorespiratory fitness)</text>
+<rect x="222" y="136" width="132" height="40" fill="#dddddd" stroke="white" stroke-width="2"/>
+<text x="288" y="161" font-size="14" font-weight="700" text-anchor="middle" fill="#222">C</text>
+<rect x="354" y="136" width="132" height="40" fill="#a6d96a" stroke="white" stroke-width="2"/>
+<text x="420" y="161" font-size="14" font-weight="700" text-anchor="middle" fill="#222">B</text>
+<rect x="486" y="136" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="618" y="136" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="750" y="136" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="882" y="136" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="948" y="161" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="1014" y="136" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="1080" y="161" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<text x="214" y="200" font-size="12" text-anchor="end">Heart rate variability</text>
+<rect x="222" y="176" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="288" y="201" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="354" y="176" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="420" y="201" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="486" y="176" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="552" y="201" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="618" y="176" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="684" y="201" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="750" y="176" width="132" height="40" fill="#a6d96a" stroke="white" stroke-width="2"/>
+<text x="816" y="201" font-size="14" font-weight="700" text-anchor="middle" fill="#222">B</text>
+<rect x="882" y="176" width="132" height="40" fill="#dddddd" stroke="white" stroke-width="2"/>
+<text x="948" y="201" font-size="14" font-weight="700" text-anchor="middle" fill="#222">C</text>
+<rect x="1014" y="176" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="1080" y="201" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<text x="214" y="240" font-size="12" text-anchor="end">Blood oxygen (SpO2)</text>
+<rect x="222" y="216" width="132" height="40" fill="#dddddd" stroke="white" stroke-width="2"/>
+<text x="288" y="241" font-size="14" font-weight="700" text-anchor="middle" fill="#222">C</text>
+<rect x="354" y="216" width="132" height="40" fill="#d73027" stroke="white" stroke-width="2"/>
+<text x="420" y="241" font-size="14" font-weight="700" text-anchor="middle" fill="white">F</text>
+<rect x="486" y="216" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="552" y="241" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="618" y="216" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="750" y="216" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="816" y="241" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="882" y="216" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="1014" y="216" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="1080" y="241" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<text x="214" y="280" font-size="12" text-anchor="end">Blood pressure (cuffless)</text>
+<rect x="222" y="256" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="354" y="256" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="486" y="256" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="618" y="256" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="750" y="256" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="882" y="256" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="1014" y="256" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="1080" y="281" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<text x="214" y="320" font-size="12" text-anchor="end">Energy expenditure (calories)</text>
+<rect x="222" y="296" width="132" height="40" fill="#d73027" stroke="white" stroke-width="2"/>
+<text x="288" y="321" font-size="14" font-weight="700" text-anchor="middle" fill="white">F</text>
+<rect x="354" y="296" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="420" y="321" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="486" y="296" width="132" height="40" fill="#d73027" stroke="white" stroke-width="2"/>
+<text x="552" y="321" font-size="14" font-weight="700" text-anchor="middle" fill="white">F</text>
+<rect x="618" y="296" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="684" y="321" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="750" y="296" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="882" y="296" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="948" y="321" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="1014" y="296" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="1080" y="321" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<text x="214" y="360" font-size="12" text-anchor="end">Step count</text>
+<rect x="222" y="336" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="288" y="361" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="354" y="336" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="420" y="361" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="486" y="336" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="552" y="361" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="618" y="336" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="750" y="336" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="882" y="336" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="948" y="361" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="1014" y="336" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="1080" y="361" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<text x="214" y="400" font-size="12" text-anchor="end">Total sleep time</text>
+<rect x="222" y="376" width="132" height="40" fill="#d73027" stroke="white" stroke-width="2"/>
+<text x="288" y="401" font-size="14" font-weight="700" text-anchor="middle" fill="white">F</text>
+<rect x="354" y="376" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="420" y="401" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="486" y="376" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="552" y="401" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="618" y="376" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="684" y="401" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="750" y="376" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="816" y="401" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="882" y="376" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="948" y="401" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="1014" y="376" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="1080" y="401" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<text x="214" y="440" font-size="12" text-anchor="end">Sleep staging</text>
+<rect x="222" y="416" width="132" height="40" fill="#d73027" stroke="white" stroke-width="2"/>
+<text x="288" y="441" font-size="14" font-weight="700" text-anchor="middle" fill="white">F</text>
+<rect x="354" y="416" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="420" y="441" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="486" y="416" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="552" y="441" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="618" y="416" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="684" y="441" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="750" y="416" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="816" y="441" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<rect x="882" y="416" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="1014" y="416" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
+<text x="1080" y="441" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
+<text x="214" y="480" font-size="12" text-anchor="end">Readiness score</text>
+<rect x="222" y="456" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="354" y="456" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="486" y="456" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="618" y="456" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="750" y="456" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
+<text x="816" y="481" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
+<rect x="882" y="456" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="1014" y="456" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<text x="214" y="520" font-size="12" text-anchor="end">Recovery score</text>
+<rect x="222" y="496" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="354" y="496" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="486" y="496" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="618" y="496" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
+<text x="684" y="521" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
+<rect x="750" y="496" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="882" y="496" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="1014" y="496" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<text x="214" y="560" font-size="12" text-anchor="end">Strain / training load score</text>
+<rect x="222" y="536" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="354" y="536" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="486" y="536" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="618" y="536" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
+<text x="684" y="561" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
+<rect x="750" y="536" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="882" y="536" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="1014" y="536" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<text x="214" y="600" font-size="12" text-anchor="end">Stress score</text>
+<rect x="222" y="576" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="354" y="576" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
+<text x="420" y="601" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
+<rect x="486" y="576" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
+<text x="552" y="601" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
+<rect x="618" y="576" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="750" y="576" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
+<text x="816" y="601" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
+<rect x="882" y="576" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="1014" y="576" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<text x="214" y="640" font-size="12" text-anchor="end">Body Battery / energy score</text>
+<rect x="222" y="616" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="354" y="616" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
+<text x="420" y="641" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
+<rect x="486" y="616" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="618" y="616" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="750" y="616" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="882" y="616" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+<rect x="1014" y="616" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
+</svg>
