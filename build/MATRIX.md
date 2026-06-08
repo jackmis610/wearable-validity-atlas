@@ -49,11 +49,15 @@ Every non-trivial verdict, with the evidence it was computed from.
 
 ### Apple Watch — Heart rate · **Grade B**
 
+**Accuracy** 71/100 · **Confidence** 69/100
+
 Good agreement but limited evidence. n=1 study(ies), 1 with gold-standard criterion; mean tier=2.00. Evidence is lossy-only (no decomposable precision), so capped below A.
 
 - fuller2020 (rest / low intensity): 71% within band (lossy) [ecg, lossy]
 
 ### Fitbit — Heart rate · **Grade B**
+
+**Accuracy** 51/100 · **Confidence** 69/100
 
 Moderate but adequately evidenced agreement. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.
 
@@ -61,11 +65,15 @@ Moderate but adequately evidenced agreement. n=1 study(ies), 1 with gold-standar
 
 ### Garmin Fenix — Heart rate · **Grade B**
 
+**Accuracy** 49/100 · **Confidence** 69/100
+
 Moderate but adequately evidenced agreement. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.
 
 - fuller2020 (rest / low intensity): 49% within band (lossy) [ecg, lossy]
 
 ### Oura Ring — Heart rate variability · **Grade B**
+
+**Accuracy** 99/100 · **Confidence** 49/100
 
 Good agreement but limited evidence. n=1 study(ies), 1 with gold-standard criterion; mean tier=2.00. Evidence is lossy-only (no decomposable precision), so capped below A.
 
@@ -73,17 +81,23 @@ Good agreement but limited evidence. n=1 study(ies), 1 with gold-standard criter
 
 ### Garmin Fenix — VO2max (cardiorespiratory fitness) · **Grade B**
 
+**Accuracy** 82.4/100 · **Confidence** 69/100
+
 Moderate but adequately evidenced agreement. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.
 
 - vo2max_frontiers2025 (graded exercise / free-living): MAPE=7.05% (5-10%, lossy) [cpet_metabolic_cart, lossy]
 
 ### Polar (Grit X / Vantage) — Heart rate variability · **Grade C**
 
+**Accuracy** 82/100 · **Confidence** 49/100
+
 Moderate agreement on thin evidence -- insufficient to certify. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.
 
 - hrv_dial2025 (overnight): CCC=0.82 (0.75-0.90) [ecg, lossy]
 
 ### Apple Watch — Blood oxygen (SpO2) · **Grade C**
+
+**Accuracy** 78.5/100 · **Confidence** 61/100
 
 Moderate agreement on thin evidence -- insufficient to certify. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00.
 
@@ -93,11 +107,15 @@ Moderate agreement on thin evidence -- insufficient to certify. n=1 study(ies), 
 
 ### Apple Watch — VO2max (cardiorespiratory fitness) · **Grade C**
 
+**Accuracy** 60.6/100 · **Confidence** 49/100
+
 Poor agreement but evidence too thin to refute outright. n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.
 
 - sensors_mdpi2025 (graded exercise): MAPE=15.8% (>10%, lossy) [cpet_metabolic_cart, lossy]
 
 ### Apple Watch — Energy expenditure (calories) · **Grade F**
+
+**Accuracy** 11/100 · **Confidence** 89/100
 
 Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. n=2 study(ies), 2 with gold-standard criterion; mean tier=0.00.
 
@@ -106,11 +124,15 @@ Refuted. Poor agreement on adequate evidence -- error exceeds usability threshol
 
 ### Fitbit — Energy expenditure (calories) · **Grade F**
 
+**Accuracy** 9.2/100 · **Confidence** 69/100
+
 Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.
 
 - fuller2020 (mixed activity): 9.2% within band (lossy) [indirect_calorimetry, lossy]
 
 ### Apple Watch — Total sleep time · **Grade F**
+
+**Accuracy** 72.5/100 · **Confidence** 69/100
 
 Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.
 
@@ -118,11 +140,15 @@ Refuted. Poor agreement on adequate evidence -- error exceeds usability threshol
 
 ### Apple Watch — Sleep staging · **Grade F**
 
+**Accuracy** 0/100 · **Confidence** 69/100
+
 Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.
 
 - keepingpace2024 (overnight): MAPE=60% (>10%, lossy) [psg, lossy]
 
 ### Garmin Fenix — Blood oxygen (SpO2) · **Grade F**
+
+**Accuracy** 10/100 · **Confidence** 49/100
 
 Refuted. A gold-standard study shows essentially no agreement (coefficient < 0.40). n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.
 
@@ -130,29 +156,43 @@ Refuted. A gold-standard study shows essentially no agreement (coefficient < 0.4
 
 ### Garmin Fenix — Body Battery / energy score · **Grade N**
 
+**Accuracy** — · **Confidence** —
+
 Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Body Battery / energy score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
 
 ### Oura Ring — Readiness score · **Grade N**
+
+**Accuracy** — · **Confidence** —
 
 Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Readiness score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
 
 ### WHOOP — Recovery score · **Grade N**
 
+**Accuracy** — · **Confidence** —
+
 Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Recovery score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
 
 ### WHOOP — Strain / training load score · **Grade N**
+
+**Accuracy** — · **Confidence** —
 
 Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Strain / training load score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
 
 ### Fitbit — Stress score · **Grade N**
 
+**Accuracy** — · **Confidence** —
+
 Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
 
 ### Garmin Fenix — Stress score · **Grade N**
 
+**Accuracy** — · **Confidence** —
+
 Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
 
 ### Oura Ring — Stress score · **Grade N**
+
+**Accuracy** — · **Confidence** —
 
 Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
 

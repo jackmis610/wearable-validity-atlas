@@ -152,6 +152,9 @@ def render_markdown(verdicts, claims, devices, counts):
     for v in sorted(graded, key=lambda x: (GRADE_ORDER.index(x.grade), x.claim, x.device)):
         lines.append("### %s — %s · **Grade %s**\n" % (
             devices[v.device]["label"], claims[v.claim]["label"], v.grade))
+        acc = "—" if v.accuracy_score is None else "%g/100" % v.accuracy_score
+        conf = "—" if v.confidence_score is None else "%g/100" % v.confidence_score
+        lines.append("**Accuracy** %s · **Confidence** %s\n" % (acc, conf))
         lines.append(v.rationale + "\n")
         if v.bias is not None or v.precision is not None or v.resolution_ratio is not None:
             bits = []
@@ -187,7 +190,9 @@ def _verdict_to_dict(v):
         "rationale": v.rationale, "n_studies": v.n_studies,
         "n_goodquality": v.n_goodquality, "best_fidelity": v.best_fidelity,
         "bias": v.bias, "precision": v.precision,
-        "resolution_ratio": v.resolution_ratio, "bases": v.bases,
+        "resolution_ratio": v.resolution_ratio,
+        "accuracy_score": v.accuracy_score, "confidence_score": v.confidence_score,
+        "bases": v.bases,
     }
 
 

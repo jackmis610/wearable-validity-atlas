@@ -333,6 +333,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": 11.0,
+      "confidence_score": 89.0,
       "bases": [
         "applewatch_npj2026 (mixed activity): 9% within band (lossy) [indirect_calorimetry, lossy]",
         "fuller2020 (mixed activity): 13% within band (lossy) [indirect_calorimetry, lossy]"
@@ -349,6 +351,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": 71.0,
+      "confidence_score": 69.0,
       "bases": [
         "fuller2020 (rest / low intensity): 71% within band (lossy) [ecg, lossy]"
       ]
@@ -364,6 +368,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -377,6 +383,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": 72.5,
+      "confidence_score": 69.0,
       "bases": [
         "keepingpace2024 (overnight): MAPE=11% (>10%, lossy) [psg, lossy]"
       ]
@@ -392,6 +400,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": 0.0,
+      "confidence_score": 69.0,
       "bases": [
         "keepingpace2024 (overnight): MAPE=60% (>10%, lossy) [psg, lossy]"
       ]
@@ -407,6 +417,8 @@
       "bias": 1.6,
       "precision": 2.1938775510204085,
       "resolution_ratio": 1.0969387755102042,
+      "accuracy_score": 78.5,
+      "confidence_score": 61.0,
       "bases": [
         "sensors_mdpi2025 (rest): R=1.10 (1-3: group-level changes only) [co_oximetry, derived]"
       ]
@@ -422,6 +434,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -435,6 +449,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": 60.6,
+      "confidence_score": 49.0,
       "bases": [
         "sensors_mdpi2025 (graded exercise): MAPE=15.8% (>10%, lossy) [cpet_metabolic_cart, lossy]"
       ]
@@ -450,6 +466,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": 9.2,
+      "confidence_score": 69.0,
       "bases": [
         "fuller2020 (mixed activity): 9.2% within band (lossy) [indirect_calorimetry, lossy]"
       ]
@@ -465,6 +483,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": 51.0,
+      "confidence_score": 69.0,
       "bases": [
         "fuller2020 (rest / low intensity): 51% within band (lossy) [ecg, lossy]"
       ]
@@ -480,6 +500,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -493,6 +515,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -506,6 +530,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -519,6 +545,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -532,6 +560,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -545,6 +575,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": null,
       "bases": []
     },
     {
@@ -558,6 +590,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": null,
       "bases": []
     },
     {
@@ -571,6 +605,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -584,6 +620,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": 49.0,
+      "confidence_score": 69.0,
       "bases": [
         "fuller2020 (rest / low intensity): 49% within band (lossy) [ecg, lossy]"
       ]
@@ -599,6 +637,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -612,6 +652,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -625,6 +667,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -638,6 +682,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": 10.0,
+      "confidence_score": 49.0,
       "bases": [
         "sensors_mdpi2025 (rest): CCC=0.10 (<0.75) [co_oximetry, lossy]"
       ]
@@ -653,6 +699,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -666,6 +714,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": null,
       "bases": []
     },
     {
@@ -679,6 +729,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": 82.4,
+      "confidence_score": 69.0,
       "bases": [
         "vo2max_frontiers2025 (graded exercise / free-living): MAPE=7.05% (5-10%, lossy) [cpet_metabolic_cart, lossy]"
       ]
@@ -694,6 +746,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -707,6 +761,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": 99.0,
+      "confidence_score": 49.0,
       "bases": [
         "hrv_dial2025 (overnight): CCC=0.99 (>=0.90) [ecg, lossy]"
       ]
@@ -722,6 +778,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": null,
       "bases": []
     },
     {
@@ -735,6 +793,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -748,6 +808,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -761,6 +823,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -774,6 +838,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": null,
       "bases": []
     },
     {
@@ -787,6 +853,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -800,6 +868,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -813,6 +883,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": 82.0,
+      "confidence_score": 49.0,
       "bases": [
         "hrv_dial2025 (overnight): CCC=0.82 (0.75-0.90) [ecg, lossy]"
       ]
@@ -828,6 +900,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -841,6 +915,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -854,6 +930,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -867,6 +945,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -880,6 +960,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -893,6 +975,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -906,6 +990,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -919,6 +1005,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -932,6 +1020,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -945,6 +1035,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -958,6 +1050,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -971,6 +1065,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -984,6 +1080,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -997,6 +1095,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -1010,6 +1110,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -1023,6 +1125,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": null,
       "bases": []
     },
     {
@@ -1036,6 +1140,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -1049,6 +1155,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": 3.0,
       "bases": []
     },
     {
@@ -1062,6 +1170,8 @@
       "bias": null,
       "precision": null,
       "resolution_ratio": null,
+      "accuracy_score": null,
+      "confidence_score": null,
       "bases": []
     }
   ]

@@ -112,6 +112,16 @@
   .badge{display:inline-flex;align-items:center;gap:9px;border-radius:10px;padding:8px 13px;font-weight:600;font-size:14px}
   .badge .lt{font-size:19px;font-weight:800}
   .drawer .body{padding:18px 24px 30px;overflow:auto}
+  .scores{display:flex;flex-direction:column;gap:14px;margin:0 0 18px}
+  .score .slabel{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;
+    text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+  .score .sv{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--ink);letter-spacing:0;text-transform:none}
+  .score .sv small{font-size:12px;color:var(--muted);font-weight:400}
+  .score .sv.na{font-size:14px;color:var(--muted);font-style:italic}
+  .track{height:9px;border-radius:6px;background:#eee9df;margin:6px 0 4px;overflow:hidden}
+  .track .fill{height:100%;border-radius:6px;transition:width .3s}
+  .track .fill.na{width:100%;background:repeating-linear-gradient(45deg,#eee9df,#eee9df 5px,#e2dccf 5px,#e2dccf 10px)}
+  .shint{font-size:11.5px;color:var(--muted)}
   .rationale{font-size:14.5px;color:#33302b;background:#faf8f2;border:1px solid var(--line);
     border-radius:12px;padding:13px 15px}
   .kvs{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 6px}
@@ -202,6 +212,7 @@
     <p>Errors are then made comparable across metrics with different units via the <b>Resolution Ratio</b>:</p>
     <div class="formula">R = device precision ÷ smallest worthwhile change</div>
     <p style="margin-top:4px;font-size:13.5px;color:#6b6862">R&nbsp;&lt;&nbsp;1 resolves a change worth acting on · R&nbsp;≥&nbsp;3 means the noise exceeds the signal. A claim resting only on a lossy statistic (MAPE, “% within”) is capped below A — one conflated number can’t prove both trueness and precision.</p>
+    <p><b>Two scores sit under every grade</b>, because one letter can’t answer two different questions. <b>Accuracy</b> (0–100) is how close the device gets to the criterion <i>when measured</i>; <b>Confidence</b> (0–100) is how much independent evidence backs that number. This mirrors the clinical <a href="https://www.gradeworkinggroup.org/" target="_blank" rel="noopener">GRADE</a> split between an effect and the certainty of evidence. A marketed-but-unstudied claim (Grade&nbsp;D) has <i>no</i> accuracy score and near-zero confidence — an empty cell of knowledge, not a bad measurement. Cell shading reflects confidence: faint cells are weakly evidenced.</p>
     <div class="gloss" id="gloss"></div>
     <p style="font-size:13.5px;color:#6b6862"><b>Grade N</b> is a deliberate stance: a proprietary score like “Readiness” has no gold-standard in physical units, so you <i>cannot</i> validate it for accuracy — only for whether it predicts anything. Grading it accurate or inaccurate is a category error.</p>
   </div>
@@ -215,6 +226,16 @@
   const active=new Set(grades);           // grade filters
   let query='', selected=null;
   const lightText=g=>g==='A'||g==='F'||g==='N';
+  function scoreBar(label,val,hint,kind){
+    if(val==null){
+      return `<div class="score"><div class="slabel">${label}<span class="sv na">— not measured</span></div>`
+            +`<div class="track"><div class="fill na"></div></div><div class="shint">${hint}</div></div>`;
+    }
+    const col=kind==='acc'?(val>=80?legend.A.color:val>=50?legend.B.color:legend.F.color):'#5b6b7a';
+    return `<div class="score"><div class="slabel">${label}<span class="sv">${val}<small>/100</small></span></div>`
+          +`<div class="track"><div class="fill" style="width:${val}%;background:${col}"></div></div>`
+          +`<div class="shint">${hint}</div></div>`;
+  }
 
   // ---- Stat chips + distribution bar ----
   const counts=DATA.meta.counts;
@@ -262,7 +283,11 @@
     DATA.devices.forEach(d=>{
       const c=cellMap[d.id+'|'+cl.id];
       if(c){const col=legend[c.grade].color, tc=lightText(c.grade)?'#fff':'#222';
-        html+=`<td class="cell" data-device="${d.id}" data-claim="${cl.id}"><button class="sq" data-key="${d.id}|${cl.id}" style="background:${col};color:${tc}" aria-label="${d.label} ${cl.label}: grade ${c.grade}">${c.grade}</button></td>`;
+        const cf=c.confidence_score, op=(cf==null)?1:(0.5+0.5*cf/100);
+        const tip=(c.accuracy_score==null)
+          ? `${d.label} · ${cl.label} — grade ${c.grade} (${legend[c.grade].label}); not measured · confidence ${cf==null?'n/a':cf+'/100'}`
+          : `${d.label} · ${cl.label} — accuracy ${c.accuracy_score}/100 · confidence ${cf}/100`;
+        html+=`<td class="cell" data-device="${d.id}" data-claim="${cl.id}"><button class="sq" data-key="${d.id}|${cl.id}" style="background:${col};color:${tc};opacity:${op.toFixed(3)}" title="${tip}" aria-label="${tip}">${c.grade}</button></td>`;
       }else{
         html+=`<td class="cell" data-device="${d.id}" data-claim="${cl.id}"><div class="sq empty" title="not in catalogue">·</div></td>`;
       }
@@ -294,7 +319,9 @@
     document.getElementById('dTitle').textContent=cl.label;
     document.getElementById('dBadge').innerHTML=
       `<span class="badge" style="background:${col};color:${tc}"><span class="lt">${c.grade}</span> ${legend[c.grade].label}</span>`;
-    let body=`<div class="rationale">${c.rationale}</div>`;
+    let body=scoreBar('Accuracy',c.accuracy_score,'how close to the criterion when measured','acc')
+            +scoreBar('Confidence',c.confidence_score,'how much independent evidence backs that number','conf');
+    body=`<div class="scores">${body}</div><div class="rationale">${c.rationale}</div>`;
     const kv=[];
     if(c.bias!=null)kv.push(['Bias',(+c.bias).toPrecision(3)]);
     if(c.precision!=null)kv.push(['Precision (SD)',(+c.precision).toPrecision(3)]);

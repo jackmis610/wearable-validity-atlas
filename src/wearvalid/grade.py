@@ -39,6 +39,8 @@ class CellVerdict:
     bias: Optional[float] = None
     precision: Optional[float] = None
     resolution_ratio: Optional[float] = None
+    accuracy_score: Optional[float] = None     # 0-100: how close to criterion when measured
+    confidence_score: Optional[float] = None   # 0-100: how much to trust the accuracy score
     bases: List[str] = field(default_factory=list)
 
 
@@ -97,6 +99,41 @@ def agreement_tier(c: Canonical, swc: Optional[float]):
 
 
 _FIDELITY_RANK = {"exact": 3, "derived": 2, "lossy": 1, "incomparable": 0, "none": -1}
+# Confidence contribution of the best available fidelity.
+_FIDELITY_CONF = {"exact": 20, "derived": 18, "lossy": 6, "incomparable": 0, "none": 0}
+
+
+def _ratio_to_score(R):
+    """Map a Resolution Ratio (or MAE/SWC ratio) to a 0-100 accuracy score.
+
+    Anchored to the tier cut-points so the number never contradicts the tier:
+    R=0 -> 100, R=1 (resolves SWC) -> 80, R=3 -> 50.
+    """
+    if R <= 1:
+        return max(0.0, 100 - 20 * R)
+    if R < 3:
+        return max(0.0, 80 - 15 * (R - 1))
+    return max(0.0, 50 - 10 * (R - 3))
+
+
+def accuracy_from_canon(c, swc):
+    """Accuracy score (0-100) for a single measurement, or None if unmeasurable.
+
+    Uses the same evidence ladder as `agreement_tier`, so an 80+ score always
+    corresponds to the 'good' tier, 50-80 to 'moderate', <50 to 'poor'.
+    """
+    R = resolution_ratio(c.precision, swc)
+    if R is not None:
+        return _ratio_to_score(R)
+    if c.agreement is not None:
+        return min(100.0, max(0.0, 100 * c.agreement))
+    if c.accuracy_kind == "mape":
+        return min(100.0, max(0.0, 100 - 2.5 * c.accuracy_proxy))
+    if c.accuracy_kind == "pct_within":
+        return min(100.0, max(0.0, c.accuracy_proxy))
+    if c.accuracy_kind == "mae" and swc:
+        return _ratio_to_score(c.accuracy_proxy / swc)
+    return None
 
 
 def grade_cell(device_id, claim, measurements, swc, marketed=False) -> CellVerdict:
@@ -124,19 +161,22 @@ def grade_cell(device_id, claim, measurements, swc, marketed=False) -> CellVerdi
 
     # --- No independent evidence --------------------------------------------
     if not indep:
+        v.accuracy_score = None          # nothing was measured
         if marketed:
             v.grade = "D"
+            v.confidence_score = 3.0      # we only know that they claim it
             v.rationale = (
                 "Marketed by the manufacturer but no independent criterion-validation "
                 "study in the current corpus. Claim rests on internal data only."
             )
         else:
             v.grade = "C"
+            v.confidence_score = 0.0
             v.rationale = "No independent validation in the current corpus."
         return v
 
     # --- Score the evidence --------------------------------------------------
-    scores, bases = [], []
+    scores, bases, acc_scores = [], [], []
     n_gold = 0
     best_fid = "incomparable"
     null_gold_hit = False
@@ -147,6 +187,9 @@ def grade_cell(device_id, claim, measurements, swc, marketed=False) -> CellVerdi
             m["label"], basis, m["criterion"], m["canon"].fidelity))
         if tier is not None:
             scores.append(_TIER_SCORE[tier])
+        a = accuracy_from_canon(m["canon"], swc)
+        if a is not None:
+            acc_scores.append(a)
         if m["is_gold"]:
             n_gold += 1
             if m.get("is_review"):
@@ -161,6 +204,8 @@ def grade_cell(device_id, claim, measurements, swc, marketed=False) -> CellVerdi
     v.n_goodquality = n_gold
     v.best_fidelity = best_fid
     v.bases = bases
+    if acc_scores:
+        v.accuracy_score = round(sum(acc_scores) / len(acc_scores), 1)
     # carry through the best precision-based numbers for display
     for m in indep:
         if m["canon"].precision is not None:
@@ -171,6 +216,7 @@ def grade_cell(device_id, claim, measurements, swc, marketed=False) -> CellVerdi
 
     if not scores:
         v.grade = "C"
+        v.confidence_score = float(min(40, _FIDELITY_CONF[best_fid] + 5 * len(indep)))
         v.rationale = (
             "%d independent study(ies) but none reported an agreement statistic "
             "usable for grading (correlation-only or unconvertible)." % len(indep)
@@ -183,6 +229,20 @@ def grade_cell(device_id, claim, measurements, swc, marketed=False) -> CellVerdi
     lossy_only = best_fid in ("lossy", "incomparable")
     # "Strong" = replicated with adequate criterion, a pooled review, or many studies.
     strong = (n_gold >= 2) or gold_review or (n_gold >= 1 and len(indep) >= 3)
+
+    # --- Confidence score (0-100): how much to trust the accuracy number -----
+    conf = 0.0
+    if n_gold >= 1:
+        conf += 35
+    if n_gold >= 2:
+        conf += 20                    # replication with a gold criterion
+    elif len(indep) >= 2:
+        conf += 8                     # replication without a gold criterion
+    if gold_review:
+        conf += 20                    # pooled across many primary studies
+    conf += _FIDELITY_CONF[best_fid]  # decomposable evidence is worth more
+    conf += -10 if (has_good and has_poor) else 8   # consistency
+    v.confidence_score = float(max(0, min(100, round(conf))))
 
     fid_note = "" if not lossy_only else " Evidence is lossy-only (no decomposable precision), so capped below A."
     summary = "n=%d study(ies), %d with gold-standard criterion; mean tier=%.2f." % (

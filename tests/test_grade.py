@@ -1,4 +1,5 @@
-from wearvalid.grade import agreement_tier, grade_cell, resolution_ratio
+from wearvalid.grade import (accuracy_from_canon, agreement_tier, grade_cell,
+                             resolution_ratio)
 from wearvalid.normalize import normalize
 
 HR = {"id": "heart_rate", "label": "Heart rate", "validatable": True,
@@ -51,6 +52,30 @@ def test_replicated_decomposable_good_evidence_reaches_A():
           _m({"loa_lower": -1.0, "loa_upper": 1.4}, label="s2")]
     v = grade_cell("apple_watch", HR, ms, swc=3.0, marketed=True)
     assert v.grade == "A"
+
+
+def test_accuracy_score_mappings():
+    assert accuracy_from_canon(normalize({"ccc": 0.99}), None) == 99.0
+    assert accuracy_from_canon(normalize({"ccc": 0.10}), None) == 10.0
+    # R=1 (precision == swc) sits at the good/moderate boundary -> 80
+    assert accuracy_from_canon(normalize({"loa_lower": -1.96, "loa_upper": 1.96}), 1.0) == 80.0
+    # MAPE 8% -> 100 - 2.5*8 = 80
+    assert accuracy_from_canon(normalize({"mape": 8}), None) == 80.0
+    # nothing measurable
+    assert accuracy_from_canon(normalize({"pearson_r": 0.9}), None) is None
+
+
+def test_unmeasured_cells_have_no_accuracy_but_track_confidence():
+    d = grade_cell("whoop", HR, [], swc=3.0, marketed=True)   # Grade D
+    assert d.grade == "D" and d.accuracy_score is None and d.confidence_score == 3.0
+    n = grade_cell("oura", READINESS, [], swc=None, marketed=True)  # Grade N
+    assert n.accuracy_score is None and n.confidence_score is None
+
+
+def test_good_single_study_high_accuracy_modest_confidence():
+    v = grade_cell("oura", HR, [_m({"ccc": 0.99})], swc=3.0, marketed=True)
+    assert v.accuracy_score == 99.0
+    assert 30 <= v.confidence_score <= 60        # one primary gold study, not replicated
 
 
 def test_conditional_when_good_and_poor_mix():
