@@ -1,17 +1,16 @@
 {
   "meta": {
     "version": "0.1.0",
-    "n_cells": 55,
+    "n_cells": 48,
     "n_devices": 7,
-    "n_claims": 14,
+    "n_claims": 9,
     "n_studies": 6,
     "counts": {
       "A": 0,
       "B": 5,
       "C": 3,
       "D": 35,
-      "F": 5,
-      "N": 7
+      "F": 5
     }
   },
   "legend": {
@@ -34,10 +33,6 @@
     "F": {
       "label": "Refuted",
       "color": "#d73027"
-    },
-    "N": {
-      "label": "Not validatable (composite)",
-      "color": "#4d4d4d"
     }
   },
   "grade_order": [
@@ -45,8 +40,7 @@
     "B",
     "C",
     "D",
-    "F",
-    "N"
+    "F"
   ],
   "swc": {
     "heart_rate": {
@@ -108,111 +102,81 @@
     {
       "id": "heart_rate",
       "label": "Heart rate",
-      "validatable": true,
       "gold_criteria": [
         "ecg",
         "chest_strap_ecg"
-      ]
+      ],
+      "criterion_label": "vs ECG"
     },
     {
       "id": "vo2max",
       "label": "VO2max (cardiorespiratory fitness)",
-      "validatable": true,
       "gold_criteria": [
         "cpet_metabolic_cart",
         "douglas_bag"
-      ]
+      ],
+      "criterion_label": "vs CPET"
     },
     {
       "id": "hrv",
       "label": "Heart rate variability",
-      "validatable": true,
       "gold_criteria": [
         "ecg",
         "chest_strap_ecg"
-      ]
+      ],
+      "criterion_label": "vs ECG"
     },
     {
       "id": "spo2",
       "label": "Blood oxygen (SpO2)",
-      "validatable": true,
       "gold_criteria": [
         "co_oximetry",
         "arterial_blood_gas"
-      ]
+      ],
+      "criterion_label": "vs co-oximetry"
     },
     {
       "id": "blood_pressure",
       "label": "Blood pressure (cuffless)",
-      "validatable": true,
       "gold_criteria": [
         "arterial_line",
         "validated_cuff"
-      ]
+      ],
+      "criterion_label": "vs arterial line"
     },
     {
       "id": "energy_expenditure",
       "label": "Energy expenditure (calories)",
-      "validatable": true,
       "gold_criteria": [
         "indirect_calorimetry",
         "doubly_labeled_water"
-      ]
+      ],
+      "criterion_label": "vs calorimetry"
     },
     {
       "id": "steps",
       "label": "Step count",
-      "validatable": true,
       "gold_criteria": [
         "direct_observation",
         "video"
-      ]
+      ],
+      "criterion_label": "vs observation"
     },
     {
       "id": "sleep_duration",
       "label": "Total sleep time",
-      "validatable": true,
       "gold_criteria": [
         "psg"
-      ]
+      ],
+      "criterion_label": "vs PSG"
     },
     {
       "id": "sleep_stages",
       "label": "Sleep staging",
-      "validatable": true,
       "gold_criteria": [
         "psg"
-      ]
-    },
-    {
-      "id": "readiness",
-      "label": "Readiness score",
-      "validatable": false,
-      "gold_criteria": []
-    },
-    {
-      "id": "recovery",
-      "label": "Recovery score",
-      "validatable": false,
-      "gold_criteria": []
-    },
-    {
-      "id": "strain",
-      "label": "Strain / training load score",
-      "validatable": false,
-      "gold_criteria": []
-    },
-    {
-      "id": "stress",
-      "label": "Stress score",
-      "validatable": false,
-      "gold_criteria": []
-    },
-    {
-      "id": "body_battery",
-      "label": "Body Battery / energy score",
-      "validatable": false,
-      "gold_criteria": []
+      ],
+      "criterion_label": "vs PSG"
     }
   ],
   "devices": [
@@ -243,9 +207,7 @@
         "energy_expenditure",
         "steps",
         "sleep_duration",
-        "sleep_stages",
-        "body_battery",
-        "stress"
+        "sleep_stages"
       ]
     },
     {
@@ -259,8 +221,7 @@
         "energy_expenditure",
         "steps",
         "sleep_duration",
-        "sleep_stages",
-        "stress"
+        "sleep_stages"
       ]
     },
     {
@@ -272,9 +233,7 @@
         "hrv",
         "energy_expenditure",
         "sleep_duration",
-        "sleep_stages",
-        "recovery",
-        "strain"
+        "sleep_stages"
       ]
     },
     {
@@ -286,9 +245,7 @@
         "hrv",
         "spo2",
         "sleep_duration",
-        "sleep_stages",
-        "readiness",
-        "stress"
+        "sleep_stages"
       ]
     },
     {
@@ -565,36 +522,6 @@
       "bases": []
     },
     {
-      "device": "fitbit",
-      "claim": "stress",
-      "grade": "N",
-      "rationale": "Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).",
-      "n_studies": 0,
-      "n_goodquality": 0,
-      "best_fidelity": "none",
-      "bias": null,
-      "precision": null,
-      "resolution_ratio": null,
-      "accuracy_score": null,
-      "confidence_score": null,
-      "bases": []
-    },
-    {
-      "device": "garmin_fenix",
-      "claim": "body_battery",
-      "grade": "N",
-      "rationale": "Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Body Battery / energy score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).",
-      "n_studies": 0,
-      "n_goodquality": 0,
-      "best_fidelity": "none",
-      "bias": null,
-      "precision": null,
-      "resolution_ratio": null,
-      "accuracy_score": null,
-      "confidence_score": null,
-      "bases": []
-    },
-    {
       "device": "garmin_fenix",
       "claim": "energy_expenditure",
       "grade": "D",
@@ -705,21 +632,6 @@
     },
     {
       "device": "garmin_fenix",
-      "claim": "stress",
-      "grade": "N",
-      "rationale": "Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).",
-      "n_studies": 0,
-      "n_goodquality": 0,
-      "best_fidelity": "none",
-      "bias": null,
-      "precision": null,
-      "resolution_ratio": null,
-      "accuracy_score": null,
-      "confidence_score": null,
-      "bases": []
-    },
-    {
-      "device": "garmin_fenix",
       "claim": "vo2max",
       "grade": "B",
       "rationale": "Moderate but adequately evidenced agreement. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.",
@@ -769,21 +681,6 @@
     },
     {
       "device": "oura",
-      "claim": "readiness",
-      "grade": "N",
-      "rationale": "Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Readiness score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).",
-      "n_studies": 0,
-      "n_goodquality": 0,
-      "best_fidelity": "none",
-      "bias": null,
-      "precision": null,
-      "resolution_ratio": null,
-      "accuracy_score": null,
-      "confidence_score": null,
-      "bases": []
-    },
-    {
-      "device": "oura",
       "claim": "sleep_duration",
       "grade": "D",
       "rationale": "Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.",
@@ -825,21 +722,6 @@
       "resolution_ratio": null,
       "accuracy_score": null,
       "confidence_score": 3.0,
-      "bases": []
-    },
-    {
-      "device": "oura",
-      "claim": "stress",
-      "grade": "N",
-      "rationale": "Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).",
-      "n_studies": 0,
-      "n_goodquality": 0,
-      "best_fidelity": "none",
-      "bias": null,
-      "precision": null,
-      "resolution_ratio": null,
-      "accuracy_score": null,
-      "confidence_score": null,
       "bases": []
     },
     {
@@ -1116,21 +998,6 @@
     },
     {
       "device": "whoop",
-      "claim": "recovery",
-      "grade": "N",
-      "rationale": "Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Recovery score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).",
-      "n_studies": 0,
-      "n_goodquality": 0,
-      "best_fidelity": "none",
-      "bias": null,
-      "precision": null,
-      "resolution_ratio": null,
-      "accuracy_score": null,
-      "confidence_score": null,
-      "bases": []
-    },
-    {
-      "device": "whoop",
       "claim": "sleep_duration",
       "grade": "D",
       "rationale": "Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.",
@@ -1157,21 +1024,6 @@
       "resolution_ratio": null,
       "accuracy_score": null,
       "confidence_score": 3.0,
-      "bases": []
-    },
-    {
-      "device": "whoop",
-      "claim": "strain",
-      "grade": "N",
-      "rationale": "Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Strain / training load score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).",
-      "n_studies": 0,
-      "n_goodquality": 0,
-      "best_fidelity": "none",
-      "bias": null,
-      "precision": null,
-      "resolution_ratio": null,
-      "accuracy_score": null,
-      "confidence_score": null,
       "bases": []
     }
   ]

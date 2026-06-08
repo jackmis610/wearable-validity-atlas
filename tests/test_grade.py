@@ -2,10 +2,7 @@ from wearvalid.grade import (accuracy_from_canon, agreement_tier, grade_cell,
                              resolution_ratio)
 from wearvalid.normalize import normalize
 
-HR = {"id": "heart_rate", "label": "Heart rate", "validatable": True,
-      "gold_criteria": ["ecg"]}
-READINESS = {"id": "readiness", "label": "Readiness score", "validatable": False,
-             "gold_criteria": []}
+HR = {"id": "heart_rate", "label": "Heart rate", "gold_criteria": ["ecg"]}
 
 
 def _m(reported, criterion="ecg", independent=True, is_review=False, label="s"):
@@ -23,11 +20,6 @@ def test_resolution_ratio():
 def test_resolution_ratio_drives_tier():
     tier, _ = agreement_tier(normalize({"loa_lower": -1, "loa_upper": 1}), swc=3.0)
     assert tier == "good"  # precision ~0.51, R~0.17
-
-
-def test_composite_is_N():
-    v = grade_cell("oura", READINESS, [], swc=None, marketed=True)
-    assert v.grade == "N"
 
 
 def test_marketed_without_evidence_is_D():
@@ -90,8 +82,6 @@ def test_swapped_loa_never_exceeds_100():
 def test_unmeasured_cells_have_no_accuracy_but_track_confidence():
     d = grade_cell("whoop", HR, [], swc=3.0, marketed=True)   # Grade D
     assert d.grade == "D" and d.accuracy_score is None and d.confidence_score == 3.0
-    n = grade_cell("oura", READINESS, [], swc=None, marketed=True)  # Grade N
-    assert n.accuracy_score is None and n.confidence_score is None
 
 
 def test_good_single_study_high_accuracy_modest_confidence():

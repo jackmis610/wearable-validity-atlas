@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1158" height="668" font-family="-apple-system,Segoe UI,Roboto,sans-serif">
-<rect width="1158" height="668" fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1158" height="468" font-family="-apple-system,Segoe UI,Roboto,sans-serif">
+<rect width="1158" height="468" fill="white"/>
 <text x="12" y="26" font-size="18" font-weight="700">Wearable Validity Matrix</text>
 <text x="288" y="78" font-size="12" font-weight="600" text-anchor="middle">Apple Watch</text>
 <text x="420" y="78" font-size="12" font-weight="600" text-anchor="middle">Garmin Fenix</text>
@@ -128,51 +128,4 @@
 <rect x="882" y="416" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
 <rect x="1014" y="416" width="132" height="40" fill="#fdae61" stroke="white" stroke-width="2"/>
 <text x="1080" y="441" font-size="14" font-weight="700" text-anchor="middle" fill="#222">D</text>
-<text x="214" y="480" font-size="12" text-anchor="end">Readiness score</text>
-<rect x="222" y="456" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="354" y="456" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="486" y="456" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="618" y="456" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="750" y="456" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
-<text x="816" y="481" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
-<rect x="882" y="456" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="1014" y="456" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<text x="214" y="520" font-size="12" text-anchor="end">Recovery score</text>
-<rect x="222" y="496" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="354" y="496" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="486" y="496" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="618" y="496" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
-<text x="684" y="521" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
-<rect x="750" y="496" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="882" y="496" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="1014" y="496" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<text x="214" y="560" font-size="12" text-anchor="end">Strain / training load score</text>
-<rect x="222" y="536" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="354" y="536" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="486" y="536" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="618" y="536" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
-<text x="684" y="561" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
-<rect x="750" y="536" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="882" y="536" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="1014" y="536" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<text x="214" y="600" font-size="12" text-anchor="end">Stress score</text>
-<rect x="222" y="576" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="354" y="576" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
-<text x="420" y="601" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
-<rect x="486" y="576" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
-<text x="552" y="601" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
-<rect x="618" y="576" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="750" y="576" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
-<text x="816" y="601" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
-<rect x="882" y="576" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="1014" y="576" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<text x="214" y="640" font-size="12" text-anchor="end">Body Battery / energy score</text>
-<rect x="222" y="616" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="354" y="616" width="132" height="40" fill="#4d4d4d" stroke="white" stroke-width="2"/>
-<text x="420" y="641" font-size="14" font-weight="700" text-anchor="middle" fill="white">N</text>
-<rect x="486" y="616" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="618" y="616" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="750" y="616" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="882" y="616" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
-<rect x="1014" y="616" width="132" height="40" fill="#f7f7f7" stroke="white" stroke-width="2"/>
 </svg>

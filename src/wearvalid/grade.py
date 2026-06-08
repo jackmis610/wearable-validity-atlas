@@ -145,17 +145,6 @@ def grade_cell(device_id, claim, measurements, swc, marketed=False) -> CellVerdi
     """
     v = CellVerdict(device=device_id, claim=claim["id"], grade="C", rationale="")
 
-    # --- Composite scores have no external criterion: not validatable --------
-    if not claim.get("validatable", True):
-        v.grade = "N"
-        v.rationale = (
-            "Proprietary composite score with no external criterion in physical "
-            "units (you cannot Bland-Altman a '%s'). Not validatable as measurement "
-            "accuracy; assess construct/predictive validity instead (does it "
-            "predict performance, illness, or injury?)." % claim["label"]
-        )
-        return v
-
     indep = [m for m in measurements if m["independent"]]
 
     # --- No independent evidence --------------------------------------------

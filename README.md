@@ -4,7 +4,7 @@
 
 Consumer wearables now make dozens of physiological claims — VO₂max, HRV, SpO₂, sleep stages, recovery, cuffless blood pressure, calorie burn. The validation literature behind those claims is scattered across hundreds of journal articles that report agreement in mutually incompatible ways, and the existing syntheses are annual PDFs organized for academics. This project turns that literature into a **queryable, versioned, fully-auditable grade matrix** — where every verdict is *computed* from study-level data by transparent code, not asserted.
 
-> The organizing finding: **wearables tend to be best validated for the metrics nobody buys them for (resting HR, steps) and least validated for the metrics they're marketed on (recovery scores, cuffless BP, calorie burn).** The Atlas makes that asymmetry legible at a glance.
+> The organizing finding: **wearables tend to be best validated for the metrics nobody buys them for (resting HR, steps) and least validated for the metrics they're marketed on (cuffless BP, calorie burn, sleep staging).** The Atlas makes that asymmetry legible at a glance.
 
 ![Wearable Validity Matrix](build/heatmap.svg)
 
@@ -31,7 +31,7 @@ The data is embedded at build time, so it works offline and deploys as-is to **G
 | **Auditability** | Read the prose | Every grade ships with its evidence + a deterministic rationale |
 | **Common axis** | None — units differ per metric | **Resolution Ratio** (error ÷ smallest worthwhile change) |
 | **Marketed-but-unvalidated** | Invisible | First-class **Grade D** |
-| **Proprietary scores** | Graded as if measurable | **Grade N** — flagged as category-error to validate |
+| **Proprietary scores** | Reviewed as if measurable | **Out of scope, and explained** — no criterion exists to validate them |
 | **Update model** | Annual | Add a YAML file, rebuild |
 
 The methodology is native to exercise physiology — *trueness vs. precision*,
@@ -49,9 +49,12 @@ discourse has never imported. Full spec: **[METHODOLOGY.md](METHODOLOGY.md)**.
 | ⚪ **C** | Contested / insufficient evidence |
 | 🟠 **D** | **Unvalidated but marketed** — claim made, no independent study in the corpus |
 | 🔴 **F** | Refuted — error exceeds the usability threshold on adequate evidence |
-| ⚫ **N** | **Not validatable** — proprietary composite with no external criterion |
 
 See the live results and the per-cell audit trail in **[build/MATRIX.md](build/MATRIX.md)**.
+
+### What we don't grade
+
+Proprietary composite scores — **Readiness, Recovery, Strain, Body Battery, Stress** — are deliberately out of scope. There is no external instrument that measures "readiness," so there is nothing to validate these numbers *against*; grading their accuracy would be a category error. They are arguably the most heavily marketed and least checkable numbers in the category, and the honest thing an accuracy reference can say about them is that accuracy is not a question that applies. The Atlas grades only claims that **can** be checked against a gold standard.
 
 ---
 
@@ -120,7 +123,7 @@ measurements:
 ```
 data/
   swc.yaml            smallest-worthwhile-change anchors + criterion ceilings (the editorial calls)
-  claims.yaml         catalogue of claims; which are validatable vs proprietary composites
+  claims.yaml         catalogue of measurable claims and their gold-standard criteria
   devices.yaml        devices and the claims each one markets (drives Grade D)
   studies/*.yaml      the evidence corpus — one file per study
 src/wearvalid/
@@ -141,7 +144,7 @@ v0.1 ships a small, **illustrative** seed corpus to prove the engine end-to-end.
 A **Grade D** means "no study in *this corpus* yet," not "no study exists." Next:
 
 - [ ] Expand the corpus toward the ~249 studies catalogued in the umbrella review
-- [ ] Add construct/predictive-validity tracking for the **N** composite scores
+- [ ] Per-claim regulatory status (FDA-cleared medical claim vs. unregulated wellness)
 - [ ] Per-condition grades (rest vs. high-intensity; skin-tone moderation for PPG)
 - [ ] Static site with filterable matrix + per-cell citations
 

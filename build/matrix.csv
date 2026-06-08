@@ -14,8 +14,6 @@ fitbit,sleep_duration,D,0,0,none,,,,Marketed by the manufacturer but no independ
 fitbit,sleep_stages,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 fitbit,spo2,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 fitbit,steps,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
-fitbit,stress,N,0,0,none,,,,"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?)."
-garmin_fenix,body_battery,N,0,0,none,,,,"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Body Battery / energy score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?)."
 garmin_fenix,energy_expenditure,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 garmin_fenix,heart_rate,B,1,1,lossy,,,,"Moderate but adequately evidenced agreement. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A."
 garmin_fenix,hrv,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
@@ -23,15 +21,12 @@ garmin_fenix,sleep_duration,D,0,0,none,,,,Marketed by the manufacturer but no in
 garmin_fenix,sleep_stages,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 garmin_fenix,spo2,F,1,1,lossy,,,,"Refuted. A gold-standard study shows essentially no agreement (coefficient < 0.40). n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00."
 garmin_fenix,steps,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
-garmin_fenix,stress,N,0,0,none,,,,"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?)."
 garmin_fenix,vo2max,B,1,1,lossy,,,,"Moderate but adequately evidenced agreement. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A."
 oura,heart_rate,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 oura,hrv,B,1,1,lossy,,,,"Good agreement but limited evidence. n=1 study(ies), 1 with gold-standard criterion; mean tier=2.00. Evidence is lossy-only (no decomposable precision), so capped below A."
-oura,readiness,N,0,0,none,,,,"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Readiness score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?)."
 oura,sleep_duration,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 oura,sleep_stages,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 oura,spo2,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
-oura,stress,N,0,0,none,,,,"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?)."
 polar,energy_expenditure,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 polar,heart_rate,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 polar,hrv,C,1,1,lossy,,,,"Moderate agreement on thin evidence -- insufficient to certify. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A."
@@ -50,7 +45,5 @@ samsung_galaxy,vo2max,D,0,0,none,,,,Marketed by the manufacturer but no independ
 whoop,energy_expenditure,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 whoop,heart_rate,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 whoop,hrv,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
-whoop,recovery,N,0,0,none,,,,"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Recovery score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?)."
 whoop,sleep_duration,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
 whoop,sleep_stages,D,0,0,none,,,,Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.
-whoop,strain,N,0,0,none,,,,"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Strain / training load score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?)."

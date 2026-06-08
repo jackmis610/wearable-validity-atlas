@@ -4,11 +4,11 @@
 
 ## Headline
 
-- **55** device×claim cells graded across **7** devices.
+- **48** device×claim cells graded across **7** devices.
 
-- Grade A (established valid): **0**. Grade B or better: **5** (9%).
+- Grade A (established valid): **0**. Grade B or better: **5** (10%).
 
-- Unvalidated-but-marketed (**D**): 35 · Refuted (**F**): 5 · Not-validatable composites (**N**): 7.
+- Unvalidated-but-marketed (**D**): 35 · Refuted (**F**): 5.
 
 
 ![heatmap](heatmap.svg)
@@ -22,7 +22,6 @@
 | ⚪ C | Contested / insufficient |
 | 🟠 D | Unvalidated but marketed |
 | 🔴 F | Refuted |
-| ⚫ N | Not validatable (composite) |
 
 ## Matrix
 
@@ -37,11 +36,6 @@
 | **Step count** | 🟠 D | 🟠 D | 🟠 D | · | · | 🟠 D | 🟠 D |
 | **Total sleep time** | 🔴 F | 🟠 D | 🟠 D | 🟠 D | 🟠 D | 🟠 D | 🟠 D |
 | **Sleep staging** | 🔴 F | 🟠 D | 🟠 D | 🟠 D | 🟠 D | · | 🟠 D |
-| **Readiness score** | · | · | · | · | ⚫ N | · | · |
-| **Recovery score** | · | · | · | ⚫ N | · | · | · |
-| **Strain / training load score** | · | · | · | ⚫ N | · | · | · |
-| **Stress score** | · | ⚫ N | ⚫ N | · | ⚫ N | · | · |
-| **Body Battery / energy score** | · | ⚫ N | · | · | · | · | · |
 
 ## Audit trail (per-cell rationale)
 
@@ -153,46 +147,4 @@ Refuted. Poor agreement on adequate evidence -- error exceeds usability threshol
 Refuted. A gold-standard study shows essentially no agreement (coefficient < 0.40). n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.
 
 - sensors_mdpi2025 (rest): CCC=0.10 -> accuracy 7/100 (poor, lossy) [co_oximetry, lossy]
-
-### Garmin Fenix — Body Battery / energy score · **Grade N**
-
-**Accuracy** — · **Confidence** —
-
-Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Body Battery / energy score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
-
-### Oura Ring — Readiness score · **Grade N**
-
-**Accuracy** — · **Confidence** —
-
-Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Readiness score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
-
-### WHOOP — Recovery score · **Grade N**
-
-**Accuracy** — · **Confidence** —
-
-Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Recovery score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
-
-### WHOOP — Strain / training load score · **Grade N**
-
-**Accuracy** — · **Confidence** —
-
-Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Strain / training load score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
-
-### Fitbit — Stress score · **Grade N**
-
-**Accuracy** — · **Confidence** —
-
-Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
-
-### Garmin Fenix — Stress score · **Grade N**
-
-**Accuracy** — · **Confidence** —
-
-Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
-
-### Oura Ring — Stress score · **Grade N**
-
-**Accuracy** — · **Confidence** —
-
-Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).
 

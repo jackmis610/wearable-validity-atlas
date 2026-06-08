@@ -18,14 +18,25 @@ from .grade import grade_cell
 from .normalize import normalize
 from .heatmap import GRADE_COLOR, render_svg
 
-GRADE_ORDER = ["A", "B", "C", "D", "F", "N"]
+GRADE_ORDER = ["A", "B", "C", "D", "F"]
 GRADE_LABEL = {
     "A": "Established valid",
     "B": "Conditionally valid / good but limited",
     "C": "Contested / insufficient",
     "D": "Unvalidated but marketed",
     "F": "Refuted",
-    "N": "Not validatable (composite)",
+}
+
+# Short label for the gold-standard criterion a metric is validated against,
+# shown as a per-claim tag in the UI.
+CRITERION_LABEL = {
+    "ecg": "vs ECG", "chest_strap_ecg": "vs ECG",
+    "cpet_metabolic_cart": "vs CPET", "douglas_bag": "vs CPET",
+    "co_oximetry": "vs co-oximetry", "arterial_blood_gas": "vs ABG",
+    "arterial_line": "vs arterial line", "validated_cuff": "vs validated cuff",
+    "indirect_calorimetry": "vs calorimetry", "doubly_labeled_water": "vs DLW",
+    "direct_observation": "vs observation", "video": "vs observation",
+    "psg": "vs PSG",
 }
 
 
@@ -98,7 +109,7 @@ def coverage_stats(verdicts):
 # Rendering
 # --------------------------------------------------------------------------- #
 def _grade_glyph(g):
-    return {"A": "🟢 A", "B": "🟡 B", "C": "⚪ C", "D": "🟠 D", "F": "🔴 F", "N": "⚫ N"}[g]
+    return {"A": "🟢 A", "B": "🟡 B", "C": "⚪ C", "D": "🟠 D", "F": "🔴 F"}[g]
 
 
 def render_markdown(verdicts, claims, devices, counts):
@@ -115,9 +126,8 @@ def render_markdown(verdicts, claims, devices, counts):
                  % (total, len({v.device for v in verdicts})))
     lines.append("- Grade A (established valid): **%d**. Grade B or better: **%d** (%.0f%%).\n"
                  % (counts["A"], n_ab, 100.0 * n_ab / total if total else 0))
-    lines.append("- Unvalidated-but-marketed (**D**): %d · Refuted (**F**): %d · "
-                 "Not-validatable composites (**N**): %d.\n"
-                 % (counts["D"], counts["F"], counts["N"]))
+    lines.append("- Unvalidated-but-marketed (**D**): %d · Refuted (**F**): %d.\n"
+                 % (counts["D"], counts["F"]))
     lines.append("")
     lines.append("![heatmap](heatmap.svg)\n")
 
@@ -215,8 +225,9 @@ def build_payload(swc, claims, devices, studies):
         "grade_order": GRADE_ORDER,
         "swc": swc,
         "claims": [{"id": c["id"], "label": c["label"],
-                    "validatable": c.get("validatable", True),
-                    "gold_criteria": c.get("gold_criteria", [])}
+                    "gold_criteria": c.get("gold_criteria", []),
+                    "criterion_label": CRITERION_LABEL.get(
+                        (c.get("gold_criteria") or [None])[0], "")}
                    for c in claims.values()],
         "devices": [{"id": d["id"], "label": d["label"], "vendor": d.get("vendor", ""),
                      "markets": d.get("markets", [])}

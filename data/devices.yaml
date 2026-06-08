@@ -2,7 +2,9 @@
 #
 # `markets` drives the "Grade D" logic: if a device markets a claim but no
 # independent validation study exists for it, the cell is graded D
-# (unvalidated-but-marketed) rather than silently omitted.
+# (unvalidated-but-marketed) rather than silently omitted. Proprietary composite
+# scores (Readiness, Recovery, Strain, etc.) are intentionally not listed --
+# they are out of scope (no criterion to validate against).
 
 - id: apple_watch
   label: Apple Watch
@@ -12,22 +14,22 @@
 - id: garmin_fenix
   label: Garmin Fenix
   vendor: Garmin
-  markets: [heart_rate, vo2max, hrv, spo2, energy_expenditure, steps, sleep_duration, sleep_stages, body_battery, stress]
+  markets: [heart_rate, vo2max, hrv, spo2, energy_expenditure, steps, sleep_duration, sleep_stages]
 
 - id: fitbit
   label: Fitbit
   vendor: Google/Fitbit
-  markets: [heart_rate, hrv, spo2, energy_expenditure, steps, sleep_duration, sleep_stages, stress]
+  markets: [heart_rate, hrv, spo2, energy_expenditure, steps, sleep_duration, sleep_stages]
 
 - id: whoop
   label: WHOOP
   vendor: WHOOP
-  markets: [heart_rate, hrv, energy_expenditure, sleep_duration, sleep_stages, recovery, strain]
+  markets: [heart_rate, hrv, energy_expenditure, sleep_duration, sleep_stages]
 
 - id: oura
   label: Oura Ring
   vendor: Oura
-  markets: [heart_rate, hrv, spo2, sleep_duration, sleep_stages, readiness, stress]
+  markets: [heart_rate, hrv, spo2, sleep_duration, sleep_stages]
 
 - id: polar
   label: Polar (Grit X / Vantage)

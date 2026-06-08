@@ -10,7 +10,6 @@ GRADE_COLOR = {
     "C": "#dddddd",  # grey   - insufficient
     "D": "#fdae61",  # orange - marketed, unvalidated
     "F": "#d73027",  # red    - refuted
-    "N": "#4d4d4d",  # dark   - not validatable
 }
 CELL_W, CELL_H = 132, 40
 LABEL_W, HEAD_H = 210, 84
@@ -56,7 +55,7 @@ def render_svg(verdicts, claims, devices):
                        'stroke="white" stroke-width="2"/>'
                        % (x, ry, CELL_W, CELL_H, fill))
             if grade:
-                txtcol = "white" if grade in ("A", "F", "N") else "#222"
+                txtcol = "white" if grade in ("A", "F") else "#222"
                 out.append('<text x="%d" y="%d" font-size="14" font-weight="700" '
                            'text-anchor="middle" fill="%s">%s</text>'
                            % (x + CELL_W / 2, ry + CELL_H / 2 + 5, txtcol, grade))

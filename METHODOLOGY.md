@@ -19,8 +19,8 @@ independent validation literature. It does **not** run new device tests — it
 stances distinguish it from existing reviews:
 
 1. **Marketed-vs-validated is the organizing question.** The loudest claims
-   (Readiness, Recovery, cuffless BP, calorie burn) are routinely the least
-   validated. The Atlas surfaces that asymmetry directly via Grades **D** and **N**.
+   (cuffless blood pressure, calorie burn, sleep staging) are routinely the
+   least validated. The Atlas surfaces that asymmetry directly via Grade **D**.
 2. **A device can never be more valid than its criterion is reliable.** Every
    metric records the reference method's own error (`criterion_ceiling`), so a
    device is graded against what is *achievable*, not against perfection.
@@ -109,21 +109,23 @@ pooled (a systematic/umbrella review), or broadly studied (≥3 studies).
 | **C — Contested / insufficient** | Moderate/poor agreement on thin evidence — too weak to certify or to refute |
 | **D — Unvalidated but marketed** | Device markets the claim; **no independent study in the corpus** |
 | **F — Refuted** | Poor agreement on strong evidence, *or* a single gold-standard study showing essentially no agreement (coefficient < 0.40) |
-| **N — Not validatable** | Proprietary composite (Readiness/Recovery/Strain/Stress/Body Battery) with **no external criterion** — assessable only for construct/predictive validity, never measurement accuracy |
 
 **Lossy inputs cannot reach A.** A grade of A requires at least one study with
 decomposable precision (Bland-Altman or RMSE). A claim resting only on MAPE or
 "% within band" is capped at B no matter how favorable the number — because a
 single conflated statistic cannot prove both trueness and precision.
 
-### The N category
+### What we don't grade — proprietary composite scores
 
 You cannot Bland-Altman a "Readiness score": there is no gold-standard readiness
-in physical units. Composite scores therefore have **no measurement validity to
-assess** — only *construct/predictive* validity (does the score predict
-performance, illness, injury?). Grading them as accurate or inaccurate is a
-category error, so they receive **N** and are routed to a separate evidentiary
-question. Asserting this distinction is a deliberate contribution of the Atlas.
+in physical units. Composite scores — **Readiness, Recovery, Strain, Stress,
+Body Battery** — therefore have **no measurement validity to assess**, only
+*construct/predictive* validity (does the score predict performance, illness,
+injury?). Grading their *accuracy* would be a category error, so they are
+excluded from the matrix entirely rather than given a misleading cell. This is a
+deliberate scope decision: the Atlas grades only quantities with an external
+criterion. (A future construct-validity track — "does the score predict anything
+real?" — is a separate question the Atlas does not currently answer.)
 
 ---
 

@@ -213,8 +213,8 @@
     <div class="formula">R = device precision ÷ smallest worthwhile change</div>
     <p style="margin-top:4px;font-size:13.5px;color:#6b6862">R&nbsp;&lt;&nbsp;1 resolves a change worth acting on · R&nbsp;≥&nbsp;3 means the noise exceeds the signal. A claim resting only on a lossy statistic (MAPE, “% within”) is capped below A — one conflated number can’t prove both trueness and precision.</p>
     <p><b>Two scores sit under every grade</b>, because one letter can’t answer two different questions. <b>Accuracy</b> (0–100) is how close the device gets to the criterion <i>when measured</i>; <b>Confidence</b> (0–100) is how much independent evidence backs that number. This mirrors the clinical <a href="https://www.gradeworkinggroup.org/" target="_blank" rel="noopener">GRADE</a> split between an effect and the certainty of evidence. A marketed-but-unstudied claim (Grade&nbsp;D) has <i>no</i> accuracy score and near-zero confidence — an empty cell of knowledge, not a bad measurement. Cell shading reflects confidence: faint cells are weakly evidenced.</p>
+    <p style="font-size:13.5px;color:#6b6862"><b>Out of scope:</b> proprietary composite scores (Readiness, Recovery, Strain, Body Battery). They have no external criterion in physical units — nothing measures “readiness” — so there is nothing to validate them against. The Atlas grades only claims that <i>can</i> be checked against a gold standard.</p>
     <div class="gloss" id="gloss"></div>
-    <p style="font-size:13.5px;color:#6b6862"><b>Grade N</b> is a deliberate stance: a proprietary score like “Readiness” has no gold-standard in physical units, so you <i>cannot</i> validate it for accuracy — only for whether it predicts anything. Grading it accurate or inaccurate is a category error.</p>
   </div>
 </dialog>
 
@@ -225,7 +225,7 @@
   const cellMap={}; DATA.cells.forEach(c=>cellMap[c.device+'|'+c.claim]=c);
   const active=new Set(grades);           // grade filters
   let query='', selected=null;
-  const lightText=g=>g==='A'||g==='F'||g==='N';
+  const lightText=g=>g==='A'||g==='F';
   function scoreBar(label,val,hint,kind){
     if(val==null){
       return `<div class="score"><div class="slabel">${label}<span class="sv na">— not measured</span></div>`
@@ -244,7 +244,7 @@
     {n:counts.A,l:'Grade A (established valid)',cls:counts.A?'':'flag'},
     {n:counts.D,l:'marketed, unvalidated',cls:'warn'},
     {n:counts.F,l:'refuted',cls:'flag'},
-    {n:counts.N,l:'uncalibratable scores',cls:'dark'},
+    {n:DATA.meta.n_claims,l:'measurable claims'},
     {n:DATA.meta.n_studies,l:'studies in corpus'},
   ];
   document.getElementById('stats').innerHTML=chips.map(c=>
@@ -268,7 +268,7 @@
   });
 
   // ---- Methodology glossary ----
-  const labels={A:'Established valid',B:'Conditionally valid / good but limited',C:'Contested / insufficient',D:'Unvalidated but marketed',F:'Refuted',N:'Not validatable (composite)'};
+  const labels={A:'Established valid',B:'Conditionally valid / good but limited',C:'Contested / insufficient',D:'Unvalidated but marketed',F:'Refuted'};
   document.getElementById('gloss').innerHTML=grades.map(g=>
     `<div class="gb" style="background:${legend[g].color};color:${lightText(g)?'#fff':'#222'}">${g}</div><div>${labels[g]}</div>`).join('');
 
@@ -279,7 +279,7 @@
   DATA.devices.forEach(d=>{html+=`<th class="devhead" data-device="${d.id}"><div class="v">${d.vendor||''}</div><div class="d">${d.label}</div></th>`;});
   html+='</tr></thead><tbody>';
   DATA.claims.forEach(cl=>{
-    html+=`<tr><th class="rowhead" data-claim="${cl.id}"><div class="cl">${cl.label}</div><span class="tag ${cl.validatable?'':'comp'}">${cl.validatable?'measurable':'composite score'}</span></th>`;
+    html+=`<tr><th class="rowhead" data-claim="${cl.id}"><div class="cl">${cl.label}</div>${cl.criterion_label?`<span class="tag">${cl.criterion_label}</span>`:''}</th>`;
     DATA.devices.forEach(d=>{
       const c=cellMap[d.id+'|'+cl.id];
       if(c){const col=legend[c.grade].color, tc=lightText(c.grade)?'#fff':'#222';
@@ -340,8 +340,6 @@
                         :`No absolute smallest-worthwhile-change defined; graded on agreement coefficients. ${s.rationale||''}`;
       if(s.criterion_ceiling)body+=`<div class="ceil">Criterion ceiling — ${s.criterion_ceiling}</div>`;
       body+='</div>';
-    } else if(!cl.validatable){
-      body+='<h3 class="sec">Why N</h3><div class="swcbox">No external gold-standard exists for this composite score, so it has no measurement accuracy to assess — only whether it predicts real outcomes.</div>';
     }
     document.getElementById('dBody').innerHTML=body;
     document.getElementById('drawer').classList.add('show');
