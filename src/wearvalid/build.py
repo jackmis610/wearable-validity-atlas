@@ -8,6 +8,7 @@ Outputs (written to ./build by default):
 Run:  python -m wearvalid build
 """
 import csv
+import json
 import os
 from collections import defaultdict
 
@@ -15,7 +16,7 @@ import yaml
 
 from .grade import grade_cell
 from .normalize import normalize
-from .heatmap import render_svg
+from .heatmap import GRADE_COLOR, render_svg
 
 GRADE_ORDER = ["A", "B", "C", "D", "F", "N"]
 GRADE_LABEL = {
@@ -180,10 +181,55 @@ def write_csv(verdicts, path):
                         v.rationale])
 
 
-def build(data_dir, out_dir):
-    swc, claims, devices, studies = load_corpus(data_dir)
+def _verdict_to_dict(v):
+    return {
+        "device": v.device, "claim": v.claim, "grade": v.grade,
+        "rationale": v.rationale, "n_studies": v.n_studies,
+        "n_goodquality": v.n_goodquality, "best_fidelity": v.best_fidelity,
+        "bias": v.bias, "precision": v.precision,
+        "resolution_ratio": v.resolution_ratio, "bases": v.bases,
+    }
+
+
+def build_payload(swc, claims, devices, studies):
+    """Build the JSON payload that drives both matrix.json and the web app."""
     verdicts = grade_all(swc, claims, devices, studies)
     counts = coverage_stats(verdicts)
+    n_studies = sum(1 for _ in studies)
+    return verdicts, counts, {
+        "meta": {
+            "version": "0.1.0",
+            "n_cells": len(verdicts),
+            "n_devices": len({v.device for v in verdicts}),
+            "n_claims": len({v.claim for v in verdicts}),
+            "n_studies": n_studies,
+            "counts": counts,
+        },
+        "legend": {g: {"label": GRADE_LABEL[g], "color": GRADE_COLOR.get(g, "#ccc")}
+                   for g in GRADE_ORDER},
+        "grade_order": GRADE_ORDER,
+        "swc": swc,
+        "claims": [{"id": c["id"], "label": c["label"],
+                    "validatable": c.get("validatable", True),
+                    "gold_criteria": c.get("gold_criteria", [])}
+                   for c in claims.values()],
+        "devices": [{"id": d["id"], "label": d["label"], "vendor": d.get("vendor", ""),
+                     "markets": d.get("markets", [])}
+                    for d in devices.values()],
+        "cells": [_verdict_to_dict(v) for v in verdicts],
+    }
+
+
+def render_site(payload, template_path):
+    with open(template_path, "r") as fh:
+        tpl = fh.read()
+    data = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    return tpl.replace("/*__MATRIX_DATA__*/null", data)
+
+
+def build(data_dir, out_dir, site_dir=None, template_path=None):
+    swc, claims, devices, studies = load_corpus(data_dir)
+    verdicts, counts, payload = build_payload(swc, claims, devices, studies)
 
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "MATRIX.md"), "w") as fh:
@@ -191,5 +237,13 @@ def build(data_dir, out_dir):
     write_csv(verdicts, os.path.join(out_dir, "matrix.csv"))
     with open(os.path.join(out_dir, "heatmap.svg"), "w") as fh:
         fh.write(render_svg(verdicts, claims, devices))
+    with open(os.path.join(out_dir, "matrix.json"), "w") as fh:
+        json.dump(payload, fh, ensure_ascii=False, indent=2)
+
+    # Self-contained interactive site (data embedded -> works offline & on Pages).
+    if site_dir and template_path and os.path.exists(template_path):
+        os.makedirs(site_dir, exist_ok=True)
+        with open(os.path.join(site_dir, "index.html"), "w") as fh:
+            fh.write(render_site(payload, template_path))
 
     return verdicts, counts

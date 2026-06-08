@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wearable Validity Atlas</title>
+<meta name="description" content="An auditable, living reference for how accurate consumer wearables actually are — and how much of what they market has ever been independently validated.">
+<style>
+  :root{
+    --paper:#fbfaf7; --ink:#1c1b19; --muted:#6b6862; --line:#e7e3db;
+    --card:#ffffff; --accent:#3a5a40; --shadow:0 1px 2px rgba(28,27,25,.06),0 8px 24px rgba(28,27,25,.06);
+    --gA:#1a9850; --gB:#a6d96a; --gC:#dcdcdc; --gD:#fdae61; --gF:#d73027; --gN:#4d4d4d;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+  /* Header */
+  header.hero{padding:46px 0 14px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,5vw,50px);line-height:1.04;
+    margin:.18em 0 .12em;letter-spacing:-.01em}
+  .lede{font-size:clamp(16px,2.1vw,19px);color:#403d38;max-width:760px;margin:.2em 0 0}
+  .lede b{color:var(--ink)}
+
+  /* Stat chips + distribution bar */
+  .stats{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 6px}
+  .chip{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:11px 15px;box-shadow:var(--shadow);min-width:104px}
+  .chip .n{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1}
+  .chip .l{font-size:11.5px;color:var(--muted);margin-top:5px;letter-spacing:.02em}
+  .chip.flag .n{color:var(--gF)} .chip.warn .n{color:#c77d2e} .chip.dark .n{color:var(--gN)}
+  .distbar{display:flex;height:12px;border-radius:7px;overflow:hidden;margin:18px 0 2px;
+    border:1px solid var(--line);box-shadow:var(--shadow)}
+  .distbar span{display:block}
+  .distcap{font-size:12px;color:var(--muted);margin-top:7px}
+
+  /* Toolbar */
+  .toolbar{position:sticky;top:0;z-index:30;background:rgba(251,250,247,.86);
+    backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line);
+    padding:12px 0;margin-top:20px}
+  .toolbar .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .search{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;background:var(--card);
+    border:1px solid var(--line);border-radius:10px;padding:9px 12px;box-shadow:var(--shadow)}
+  .search input{border:0;outline:0;font-size:14px;width:100%;background:transparent;color:var(--ink)}
+  .search svg{flex:none;opacity:.5}
+  .legend{display:flex;flex-wrap:wrap;gap:7px}
+  .lg{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--card);
+    border-radius:999px;padding:6px 11px 6px 8px;font-size:12.5px;cursor:pointer;user-select:none;
+    box-shadow:var(--shadow);transition:opacity .15s,transform .05s}
+  .lg:active{transform:translateY(1px)}
+  .lg .sw{width:15px;height:15px;border-radius:5px;flex:none}
+  .lg .gl{font-weight:700} .lg .ct{color:var(--muted)}
+  .lg.off{opacity:.34;filter:grayscale(.5)}
+  .btn{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:9px 13px;
+    font-size:13px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);color:var(--ink)}
+  .btn:hover{border-color:#cfcabe}
+
+  /* Matrix */
+  .matrix-shell{margin:22px 0 8px;overflow-x:auto;border:1px solid var(--line);border-radius:16px;
+    background:var(--card);box-shadow:var(--shadow)}
+  table.matrix{border-collapse:separate;border-spacing:0;width:100%;min-width:760px}
+  table.matrix th,table.matrix td{padding:0}
+  thead th{position:sticky;top:0;z-index:5;background:var(--card)}
+  .corner{position:sticky;left:0;z-index:6;background:var(--card);min-width:188px;width:188px;
+    text-align:left;padding:16px 16px 14px!important;border-bottom:1px solid var(--line)}
+  .corner .t{font-family:var(--serif);font-size:15px;font-weight:600}
+  .corner .s{font-size:11px;color:var(--muted)}
+  .devhead{vertical-align:bottom;padding:14px 8px 14px!important;border-bottom:1px solid var(--line);
+    border-left:1px solid #f1eee7;text-align:center;min-width:96px}
+  .devhead .v{font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+  .devhead .d{font-weight:600;font-size:13px;margin-top:2px}
+  .devhead.dim,.rowhead.dim,td.cell.dim{opacity:.26}
+  .devhead.axis,.rowhead.axis{background:#f6f3ec}
+  .rowhead{position:sticky;left:0;z-index:4;background:var(--card);text-align:left;
+    padding:12px 16px!important;border-bottom:1px solid #f1eee7;min-width:188px;width:188px}
+  .rowhead .cl{font-weight:600;font-size:13.5px;line-height:1.25}
+  .rowhead .tag{display:inline-block;margin-top:4px;font-size:10px;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+  .rowhead .tag.comp{color:#7a5cab;border-color:#e1d6f0;background:#f7f2fe}
+  tbody tr td.cell{border-bottom:1px solid #f1eee7;border-left:1px solid #f1eee7;
+    text-align:center;height:54px;position:relative}
+  .sq{margin:6px auto;width:calc(100% - 12px);max-width:78px;height:42px;border-radius:9px;
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;
+    cursor:pointer;border:1px solid rgba(0,0,0,.05);transition:transform .08s,box-shadow .12s,outline-color .1s;
+    outline:2px solid transparent;outline-offset:2px}
+  .sq:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.16)}
+  .sq:focus-visible{outline-color:var(--ink)}
+  .sq.empty{background:transparent;border:1px dashed #ddd8cd;color:#c9c3b6;font-weight:400;cursor:default}
+  .sq.empty:hover{transform:none;box-shadow:none}
+  .sq.sel{outline-color:var(--ink);transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,0,0,.2)}
+  td.cell.axis{background:#faf8f2}
+
+  /* Drawer */
+  .scrim{position:fixed;inset:0;background:rgba(28,27,25,.34);opacity:0;pointer-events:none;
+    transition:opacity .2s;z-index:40}
+  .scrim.show{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,94vw);background:var(--card);
+    box-shadow:-18px 0 50px rgba(28,27,25,.18);transform:translateX(102%);
+    transition:transform .26s cubic-bezier(.3,.8,.3,1);z-index:50;display:flex;flex-direction:column}
+  .drawer.show{transform:none}
+  .drawer header{padding:22px 24px 16px;border-bottom:1px solid var(--line)}
+  .drawer .close{position:absolute;top:16px;right:16px;border:0;background:#f1eee7;width:32px;height:32px;
+    border-radius:8px;font-size:17px;cursor:pointer;color:var(--ink)}
+  .drawer .ctx{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .drawer h2{font-family:var(--serif);font-weight:600;font-size:23px;margin:.25em 0 .5em;line-height:1.1}
+  .badge{display:inline-flex;align-items:center;gap:9px;border-radius:10px;padding:8px 13px;font-weight:600;font-size:14px}
+  .badge .lt{font-size:19px;font-weight:800}
+  .drawer .body{padding:18px 24px 30px;overflow:auto}
+  .rationale{font-size:14.5px;color:#33302b;background:#faf8f2;border:1px solid var(--line);
+    border-radius:12px;padding:13px 15px}
+  .kvs{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 6px}
+  .kv{border:1px solid var(--line);border-radius:10px;padding:8px 12px;min-width:96px}
+  .kv .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+  .kv .val{font-family:var(--serif);font-size:18px;font-weight:600;margin-top:2px}
+  h3.sec{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    margin:22px 0 9px;font-weight:700}
+  ul.ev{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+  ul.ev li{font-size:13px;border-left:3px solid var(--line);padding:4px 0 4px 12px;color:#3a3731}
+  .swcbox{font-size:13px;color:#3a3731;background:#f6f3ec;border-radius:12px;padding:12px 14px}
+  .swcbox .ceil{color:var(--muted);margin-top:6px}
+
+  /* Modal */
+  dialog#method{border:1px solid var(--line);border-radius:18px;padding:0;max-width:660px;width:92vw;
+    box-shadow:0 30px 80px rgba(28,27,25,.3);color:var(--ink)}
+  dialog#method::backdrop{background:rgba(28,27,25,.4)}
+  dialog .mhead{padding:22px 26px 6px;display:flex;justify-content:space-between;align-items:start}
+  dialog h2{font-family:var(--serif);font-size:24px;margin:0}
+  dialog .mbody{padding:6px 26px 26px}
+  dialog .mbody p{color:#403d38}
+  .gloss{display:grid;grid-template-columns:auto 1fr;gap:9px 14px;align-items:start;margin:14px 0}
+  .gloss .gb{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;
+    font-weight:800;color:#fff;font-size:13px}
+  .formula{font-family:var(--serif);font-size:18px;background:#f6f3ec;border-radius:10px;padding:10px 14px;
+    display:inline-block;margin:6px 0}
+
+  footer{border-top:1px solid var(--line);margin-top:40px;padding:26px 0 60px;color:var(--muted);font-size:13px}
+  footer b{color:var(--ink)}
+  .empty-state{padding:60px 0;text-align:center;color:var(--muted)}
+  @media(max-width:620px){
+    .drawer{width:100vw}
+    .corner,.rowhead{min-width:150px;width:150px}
+  }
+</style>
+</head>
+<body>
+<script>const DATA = {"meta":{"version":"0.1.0","n_cells":55,"n_devices":7,"n_claims":14,"n_studies":6,"counts":{"A":0,"B":5,"C":3,"D":35,"F":5,"N":7}},"legend":{"A":{"label":"Established valid","color":"#1a9850"},"B":{"label":"Conditionally valid / good but limited","color":"#a6d96a"},"C":{"label":"Contested / insufficient","color":"#dddddd"},"D":{"label":"Unvalidated but marketed","color":"#fdae61"},"F":{"label":"Refuted","color":"#d73027"},"N":{"label":"Not validatable (composite)","color":"#4d4d4d"}},"grade_order":["A","B","C","D","F","N"],"swc":{"heart_rate":{"unit":"bpm","swc":3,"rationale":"~3 bpm approximates the day-to-day biological noise floor of resting HR and a training-zone-relevant increment; finer resolution is not actionable.\n","criterion_ceiling":"ECG ~+/-1 bpm"},"vo2max":{"unit":"mL/kg/min","swc":1.5,"rationale":"~3% of a typical 40-50 mL/kg/min value (~1.5 mL/kg/min), matching the smallest change a coach would act on and roughly the CPET test-retest band.\n","criterion_ceiling":"CPET (metabolic cart / Douglas bag) test-retest ~3-4% -- a device cannot beat this."},"hrv":{"unit":"ms","swc":null,"rationale":"Within-subject RMSSD varies enormously day to day; no single absolute SWC generalizes. Grade falls back to agreement coefficients (CCC/ICC) vs ECG.\n","criterion_ceiling":"ECG R-R interval (near-perfect when artifact-corrected)"},"spo2":{"unit":"%SpO2","swc":2,"rationale":"~2% spans the clinically meaningful desaturation step and aligns with the +/-2% accuracy expected of medical pulse oximeters.\n","criterion_ceiling":"Co-oximetry / arterial blood gas ~+/-1-2%"},"blood_pressure":{"unit":"mmHg","swc":5,"rationale":"~5 mmHg is the AAMI/ISO mean-difference tolerance for validated cuffs and a clinically meaningful systolic increment.\n","criterion_ceiling":"Intra-arterial line / validated auscultatory cuff ~+/-5 mmHg"},"energy_expenditure":{"unit":"%","swc":5,"rationale":"Errors are reported in percent of total expenditure; ~5% is the threshold below which calorie estimates are decision-useful for body-weight goals.\n","criterion_ceiling":"Indirect calorimetry / doubly labeled water ~5-8%"},"steps":{"unit":"%","swc":5,"rationale":"~5% step-count error is the practical threshold for activity tracking.","criterion_ceiling":"Direct observation / video ~near-perfect"},"sleep_duration":{"unit":"min","swc":30,"rationale":"~30 min total-sleep-time error is the threshold for night-to-night usefulness.","criterion_ceiling":"Polysomnography (PSG) ~ minutes"},"sleep_stages":{"unit":"%epoch","swc":null,"rationale":"Staging is categorical (epoch agreement), not a continuous quantity, so no SWC applies; grade uses epoch-agreement / error statistics directly.\n","criterion_ceiling":"PSG inter-scorer agreement only ~80% of epochs -- the realistic ceiling."}},"claims":[{"id":"heart_rate","label":"Heart rate","validatable":true,"gold_criteria":["ecg","chest_strap_ecg"]},{"id":"vo2max","label":"VO2max (cardiorespiratory fitness)","validatable":true,"gold_criteria":["cpet_metabolic_cart","douglas_bag"]},{"id":"hrv","label":"Heart rate variability","validatable":true,"gold_criteria":["ecg","chest_strap_ecg"]},{"id":"spo2","label":"Blood oxygen (SpO2)","validatable":true,"gold_criteria":["co_oximetry","arterial_blood_gas"]},{"id":"blood_pressure","label":"Blood pressure (cuffless)","validatable":true,"gold_criteria":["arterial_line","validated_cuff"]},{"id":"energy_expenditure","label":"Energy expenditure (calories)","validatable":true,"gold_criteria":["indirect_calorimetry","doubly_labeled_water"]},{"id":"steps","label":"Step count","validatable":true,"gold_criteria":["direct_observation","video"]},{"id":"sleep_duration","label":"Total sleep time","validatable":true,"gold_criteria":["psg"]},{"id":"sleep_stages","label":"Sleep staging","validatable":true,"gold_criteria":["psg"]},{"id":"readiness","label":"Readiness score","validatable":false,"gold_criteria":[]},{"id":"recovery","label":"Recovery score","validatable":false,"gold_criteria":[]},{"id":"strain","label":"Strain / training load score","validatable":false,"gold_criteria":[]},{"id":"stress","label":"Stress score","validatable":false,"gold_criteria":[]},{"id":"body_battery","label":"Body Battery / energy score","validatable":false,"gold_criteria":[]}],"devices":[{"id":"apple_watch","label":"Apple Watch","vendor":"Apple","markets":["heart_rate","vo2max","hrv","spo2","energy_expenditure","steps","sleep_duration","sleep_stages"]},{"id":"garmin_fenix","label":"Garmin Fenix","vendor":"Garmin","markets":["heart_rate","vo2max","hrv","spo2","energy_expenditure","steps","sleep_duration","sleep_stages","body_battery","stress"]},{"id":"fitbit","label":"Fitbit","vendor":"Google/Fitbit","markets":["heart_rate","hrv","spo2","energy_expenditure","steps","sleep_duration","sleep_stages","stress"]},{"id":"whoop","label":"WHOOP","vendor":"WHOOP","markets":["heart_rate","hrv","energy_expenditure","sleep_duration","sleep_stages","recovery","strain"]},{"id":"oura","label":"Oura Ring","vendor":"Oura","markets":["heart_rate","hrv","spo2","sleep_duration","sleep_stages","readiness","stress"]},{"id":"polar","label":"Polar (Grit X / Vantage)","vendor":"Polar","markets":["heart_rate","vo2max","hrv","energy_expenditure","steps","sleep_duration"]},{"id":"samsung_galaxy","label":"Samsung Galaxy Watch","vendor":"Samsung","markets":["heart_rate","vo2max","hrv","spo2","blood_pressure","energy_expenditure","steps","sleep_duration","sleep_stages"]}],"cells":[{"device":"apple_watch","claim":"energy_expenditure","grade":"F","rationale":"Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. n=2 study(ies), 2 with gold-standard criterion; mean tier=0.00.","n_studies":2,"n_goodquality":2,"best_fidelity":"lossy","bias":null,"precision":null,"resolution_ratio":null,"bases":["applewatch_npj2026 (mixed activity): 9% within band (lossy) [indirect_calorimetry, lossy]","fuller2020 (mixed activity): 13% within band (lossy) [indirect_calorimetry, lossy]"]},{"device":"apple_watch","claim":"heart_rate","grade":"B","rationale":"Good agreement but limited evidence. n=1 study(ies), 1 with gold-standard criterion; mean tier=2.00. Evidence is lossy-only (no decomposable precision), so capped below A.","n_studies":1,"n_goodquality":1,"best_fidelity":"lossy","bias":null,"precision":null,"resolution_ratio":null,"bases":["fuller2020 (rest / low intensity): 71% within band (lossy) [ecg, lossy]"]},{"device":"apple_watch","claim":"hrv","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"apple_watch","claim":"sleep_duration","grade":"F","rationale":"Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.","n_studies":1,"n_goodquality":1,"best_fidelity":"lossy","bias":null,"precision":null,"resolution_ratio":null,"bases":["keepingpace2024 (overnight): MAPE=11% (>10%, lossy) [psg, lossy]"]},{"device":"apple_watch","claim":"sleep_stages","grade":"F","rationale":"Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.","n_studies":1,"n_goodquality":1,"best_fidelity":"lossy","bias":null,"precision":null,"resolution_ratio":null,"bases":["keepingpace2024 (overnight): MAPE=60% (>10%, lossy) [psg, lossy]"]},{"device":"apple_watch","claim":"spo2","grade":"C","rationale":"Moderate agreement on thin evidence -- insufficient to certify. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00.","n_studies":1,"n_goodquality":1,"best_fidelity":"derived","bias":1.6,"precision":2.1938775510204085,"resolution_ratio":1.0969387755102042,"bases":["sensors_mdpi2025 (rest): R=1.10 (1-3: group-level changes only) [co_oximetry, derived]"]},{"device":"apple_watch","claim":"steps","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"apple_watch","claim":"vo2max","grade":"C","rationale":"Poor agreement but evidence too thin to refute outright. n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.","n_studies":1,"n_goodquality":1,"best_fidelity":"lossy","bias":null,"precision":null,"resolution_ratio":null,"bases":["sensors_mdpi2025 (graded exercise): MAPE=15.8% (>10%, lossy) [cpet_metabolic_cart, lossy]"]},{"device":"fitbit","claim":"energy_expenditure","grade":"F","rationale":"Refuted. Poor agreement on adequate evidence -- error exceeds usability threshold. n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.","n_studies":1,"n_goodquality":1,"best_fidelity":"lossy","bias":null,"precision":null,"resolution_ratio":null,"bases":["fuller2020 (mixed activity): 9.2% within band (lossy) [indirect_calorimetry, lossy]"]},{"device":"fitbit","claim":"heart_rate","grade":"B","rationale":"Moderate but adequately evidenced agreement. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.","n_studies":1,"n_goodquality":1,"best_fidelity":"lossy","bias":null,"precision":null,"resolution_ratio":null,"bases":["fuller2020 (rest / low intensity): 51% within band (lossy) [ecg, lossy]"]},{"device":"fitbit","claim":"hrv","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"fitbit","claim":"sleep_duration","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"fitbit","claim":"sleep_stages","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"fitbit","claim":"spo2","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"fitbit","claim":"steps","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"fitbit","claim":"stress","grade":"N","rationale":"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"garmin_fenix","claim":"body_battery","grade":"N","rationale":"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Body Battery / energy score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"garmin_fenix","claim":"energy_expenditure","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"garmin_fenix","claim":"heart_rate","grade":"B","rationale":"Moderate but adequately evidenced agreement. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.","n_studies":1,"n_goodquality":1,"best_fidelity":"lossy","bias":null,"precision":null,"resolution_ratio":null,"bases":["fuller2020 (rest / low intensity): 49% within band (lossy) [ecg, lossy]"]},{"device":"garmin_fenix","claim":"hrv","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"garmin_fenix","claim":"sleep_duration","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"garmin_fenix","claim":"sleep_stages","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"garmin_fenix","claim":"spo2","grade":"F","rationale":"Refuted. A gold-standard study shows essentially no agreement (coefficient < 0.40). n=1 study(ies), 1 with gold-standard criterion; mean tier=0.00.","n_studies":1,"n_goodquality":1,"best_fidelity":"lossy","bias":null,"precision":null,"resolution_ratio":null,"bases":["sensors_mdpi2025 (rest): CCC=0.10 (<0.75) [co_oximetry, lossy]"]},{"device":"garmin_fenix","claim":"steps","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"garmin_fenix","claim":"stress","grade":"N","rationale":"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"garmin_fenix","claim":"vo2max","grade":"B","rationale":"Moderate but adequately evidenced agreement. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.","n_studies":1,"n_goodquality":1,"best_fidelity":"lossy","bias":null,"precision":null,"resolution_ratio":null,"bases":["vo2max_frontiers2025 (graded exercise / free-living): MAPE=7.05% (5-10%, lossy) [cpet_metabolic_cart, lossy]"]},{"device":"oura","claim":"heart_rate","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"oura","claim":"hrv","grade":"B","rationale":"Good agreement but limited evidence. n=1 study(ies), 1 with gold-standard criterion; mean tier=2.00. Evidence is lossy-only (no decomposable precision), so capped below A.","n_studies":1,"n_goodquality":1,"best_fidelity":"lossy","bias":null,"precision":null,"resolution_ratio":null,"bases":["hrv_dial2025 (overnight): CCC=0.99 (>=0.90) [ecg, lossy]"]},{"device":"oura","claim":"readiness","grade":"N","rationale":"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Readiness score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"oura","claim":"sleep_duration","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"oura","claim":"sleep_stages","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"oura","claim":"spo2","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"oura","claim":"stress","grade":"N","rationale":"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Stress score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"polar","claim":"energy_expenditure","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"polar","claim":"heart_rate","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"polar","claim":"hrv","grade":"C","rationale":"Moderate agreement on thin evidence -- insufficient to certify. n=1 study(ies), 1 with gold-standard criterion; mean tier=1.00. Evidence is lossy-only (no decomposable precision), so capped below A.","n_studies":1,"n_goodquality":1,"best_fidelity":"lossy","bias":null,"precision":null,"resolution_ratio":null,"bases":["hrv_dial2025 (overnight): CCC=0.82 (0.75-0.90) [ecg, lossy]"]},{"device":"polar","claim":"sleep_duration","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"polar","claim":"steps","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"polar","claim":"vo2max","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"samsung_galaxy","claim":"blood_pressure","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"samsung_galaxy","claim":"energy_expenditure","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"samsung_galaxy","claim":"heart_rate","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"samsung_galaxy","claim":"hrv","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"samsung_galaxy","claim":"sleep_duration","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"samsung_galaxy","claim":"sleep_stages","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"samsung_galaxy","claim":"spo2","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"samsung_galaxy","claim":"steps","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"samsung_galaxy","claim":"vo2max","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"whoop","claim":"energy_expenditure","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"whoop","claim":"heart_rate","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"whoop","claim":"hrv","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"whoop","claim":"recovery","grade":"N","rationale":"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Recovery score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"whoop","claim":"sleep_duration","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"whoop","claim":"sleep_stages","grade":"D","rationale":"Marketed by the manufacturer but no independent criterion-validation study in the current corpus. Claim rests on internal data only.","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]},{"device":"whoop","claim":"strain","grade":"N","rationale":"Proprietary composite score with no external criterion in physical units (you cannot Bland-Altman a 'Strain / training load score'). Not validatable as measurement accuracy; assess construct/predictive validity instead (does it predict performance, illness, or injury?).","n_studies":0,"n_goodquality":0,"best_fidelity":"none","bias":null,"precision":null,"resolution_ratio":null,"bases":[]}]};</script>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Wearable Validity Atlas</div>
+    <h1>How accurate are wearables, really?</h1>
+    <p class="lede">An auditable, living reference synthesizing the independent validation literature into a single computed grade per device&nbsp;×&nbsp;claim. <b>The pattern it surfaces: wearables are best validated for the metrics nobody buys them for — and least validated for the ones they're marketed on.</b></p>
+    <div class="stats" id="stats"></div>
+    <div class="distbar" id="distbar"></div>
+    <div class="distcap" id="distcap"></div>
+  </header>
+</div>
+
+<div class="toolbar">
+  <div class="wrap row">
+    <label class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="q" type="search" placeholder="Filter devices or claims…" autocomplete="off">
+    </label>
+    <div class="legend" id="legend"></div>
+    <button class="btn" id="methodBtn">How grades work</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="matrix-shell"><div id="matrix"></div></div>
+  <p class="distcap" style="margin-top:12px">Click any cell for its full audit trail. A <b>Grade&nbsp;D</b> means the claim is marketed but has no independent study <i>in the current seed corpus</i> — not that none exists anywhere.</p>
+</div>
+
+<footer><div class="wrap">
+  Built by <b>Jack&nbsp;Mislinski</b> — exercise physiologist applying clinical measurement-science standards (trueness vs. precision, smallest worthwhile change, criterion ceilings) to the consumer-wearable field. Grades are computed deterministically from study-level data; see the <a href="../METHODOLOGY.md">methodology</a>. <span id="ver"></span>
+</div></footer>
+
+<!-- Drawer -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <header>
+    <button class="close" id="drawerClose" aria-label="Close">×</button>
+    <div class="ctx" id="dCtx"></div>
+    <h2 id="dTitle"></h2>
+    <div id="dBadge"></div>
+  </header>
+  <div class="body" id="dBody"></div>
+</aside>
+
+<!-- Methodology modal -->
+<dialog id="method">
+  <div class="mhead"><h2>How grades work</h2><button class="btn" id="methodClose">Close</button></div>
+  <div class="mbody">
+    <p>Every grade is <b>computed</b>, not assigned. Each validation study is reduced to a common form — bias (trueness) and precision (random error) — rejecting correlation-only evidence, because a device can correlate perfectly and still be systematically wrong.</p>
+    <p>Errors are then made comparable across metrics with different units via the <b>Resolution Ratio</b>:</p>
+    <div class="formula">R = device precision ÷ smallest worthwhile change</div>
+    <p style="margin-top:4px;font-size:13.5px;color:#6b6862">R&nbsp;&lt;&nbsp;1 resolves a change worth acting on · R&nbsp;≥&nbsp;3 means the noise exceeds the signal. A claim resting only on a lossy statistic (MAPE, “% within”) is capped below A — one conflated number can’t prove both trueness and precision.</p>
+    <div class="gloss" id="gloss"></div>
+    <p style="font-size:13.5px;color:#6b6862"><b>Grade N</b> is a deliberate stance: a proprietary score like “Readiness” has no gold-standard in physical units, so you <i>cannot</i> validate it for accuracy — only for whether it predicts anything. Grading it accurate or inaccurate is a category error.</p>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  if(!DATA){document.getElementById('matrix').innerHTML='<div class="empty-state">No data — run <code>python -m wearvalid build</code> to generate the matrix.</div>';return;}
+  const grades=DATA.grade_order, legend=DATA.legend;
+  const cellMap={}; DATA.cells.forEach(c=>cellMap[c.device+'|'+c.claim]=c);
+  const active=new Set(grades);           // grade filters
+  let query='', selected=null;
+  const lightText=g=>g==='A'||g==='F'||g==='N';
+
+  // ---- Stat chips + distribution bar ----
+  const counts=DATA.meta.counts;
+  const chips=[
+    {n:DATA.meta.n_cells,l:'device × claim cells'},
+    {n:counts.A,l:'Grade A (established valid)',cls:counts.A?'':'flag'},
+    {n:counts.D,l:'marketed, unvalidated',cls:'warn'},
+    {n:counts.F,l:'refuted',cls:'flag'},
+    {n:counts.N,l:'uncalibratable scores',cls:'dark'},
+    {n:DATA.meta.n_studies,l:'studies in corpus'},
+  ];
+  document.getElementById('stats').innerHTML=chips.map(c=>
+    `<div class="chip ${c.cls||''}"><div class="n">${c.n}</div><div class="l">${c.l}</div></div>`).join('');
+  const total=DATA.meta.n_cells;
+  document.getElementById('distbar').innerHTML=grades.map(g=>{
+    const w=100*counts[g]/total; return w?`<span title="${legend[g].label}: ${counts[g]}" style="width:${w}%;background:${legend[g].color}"></span>`:'';
+  }).join('');
+  document.getElementById('distcap').textContent=
+    grades.map(g=>`${g} ${counts[g]}`).join('  ·  ')+'   — grade distribution';
+  document.getElementById('ver').textContent='v'+DATA.meta.version;
+
+  // ---- Legend (clickable filters) ----
+  const legEl=document.getElementById('legend');
+  legEl.innerHTML=grades.map(g=>
+    `<button class="lg" data-g="${g}"><span class="sw" style="background:${legend[g].color}"></span><span class="gl">${g}</span><span class="ct">${counts[g]}</span></button>`).join('');
+  legEl.querySelectorAll('.lg').forEach(b=>b.onclick=()=>{
+    const g=b.dataset.g; active.has(g)?active.delete(g):active.add(g);
+    if(active.size===0){active.add(g);} // never empty
+    b.classList.toggle('off',!active.has(g)); applyFilter();
+  });
+
+  // ---- Methodology glossary ----
+  const labels={A:'Established valid',B:'Conditionally valid / good but limited',C:'Contested / insufficient',D:'Unvalidated but marketed',F:'Refuted',N:'Not validatable (composite)'};
+  document.getElementById('gloss').innerHTML=grades.map(g=>
+    `<div class="gb" style="background:${legend[g].color};color:${lightText(g)?'#fff':'#222'}">${g}</div><div>${labels[g]}</div>`).join('');
+
+  // ---- Build matrix table ----
+  const m=document.getElementById('matrix');
+  let html='<table class="matrix"><thead><tr>'+
+    '<th class="corner"><div class="t">Claim \\ Device</div><div class="s">'+DATA.meta.n_devices+' devices · '+DATA.meta.n_claims+' claims</div></th>';
+  DATA.devices.forEach(d=>{html+=`<th class="devhead" data-device="${d.id}"><div class="v">${d.vendor||''}</div><div class="d">${d.label}</div></th>`;});
+  html+='</tr></thead><tbody>';
+  DATA.claims.forEach(cl=>{
+    html+=`<tr><th class="rowhead" data-claim="${cl.id}"><div class="cl">${cl.label}</div><span class="tag ${cl.validatable?'':'comp'}">${cl.validatable?'measurable':'composite score'}</span></th>`;
+    DATA.devices.forEach(d=>{
+      const c=cellMap[d.id+'|'+cl.id];
+      if(c){const col=legend[c.grade].color, tc=lightText(c.grade)?'#fff':'#222';
+        html+=`<td class="cell" data-device="${d.id}" data-claim="${cl.id}"><button class="sq" data-key="${d.id}|${cl.id}" style="background:${col};color:${tc}" aria-label="${d.label} ${cl.label}: grade ${c.grade}">${c.grade}</button></td>`;
+      }else{
+        html+=`<td class="cell" data-device="${d.id}" data-claim="${cl.id}"><div class="sq empty" title="not in catalogue">·</div></td>`;
+      }
+    });
+    html+='</tr>';
+  });
+  html+='</tbody></table>'; m.innerHTML=html;
+
+  // ---- Cross-highlight on hover ----
+  m.addEventListener('mouseover',e=>{
+    const td=e.target.closest('td.cell,.devhead,.rowhead'); clearAxis();
+    if(!td)return; const dev=td.dataset.device, cl=td.dataset.claim;
+    m.querySelectorAll(`[data-device="${dev}"]`).forEach(x=>x.classList.add('axis'));
+    if(cl) m.querySelectorAll(`[data-claim="${cl}"]`).forEach(x=>x.classList.add('axis'));
+  });
+  m.addEventListener('mouseleave',clearAxis);
+  function clearAxis(){m.querySelectorAll('.axis').forEach(x=>x.classList.remove('axis'));}
+
+  // ---- Click cell -> drawer ----
+  m.addEventListener('click',e=>{const b=e.target.closest('.sq[data-key]'); if(b) openCell(b.dataset.key);});
+
+  function openCell(key){
+    const c=cellMap[key]; if(!c)return; selected=key;
+    m.querySelectorAll('.sq.sel').forEach(x=>x.classList.remove('sel'));
+    const btn=m.querySelector(`.sq[data-key="${CSS.escape(key)}"]`); if(btn)btn.classList.add('sel');
+    const dev=DATA.devices.find(d=>d.id===c.device), cl=DATA.claims.find(x=>x.id===c.claim);
+    const col=legend[c.grade].color, tc=lightText(c.grade)?'#fff':'#222';
+    document.getElementById('dCtx').textContent=(dev.vendor?dev.vendor+' · ':'')+dev.label;
+    document.getElementById('dTitle').textContent=cl.label;
+    document.getElementById('dBadge').innerHTML=
+      `<span class="badge" style="background:${col};color:${tc}"><span class="lt">${c.grade}</span> ${legend[c.grade].label}</span>`;
+    let body=`<div class="rationale">${c.rationale}</div>`;
+    const kv=[];
+    if(c.bias!=null)kv.push(['Bias',(+c.bias).toPrecision(3)]);
+    if(c.precision!=null)kv.push(['Precision (SD)',(+c.precision).toPrecision(3)]);
+    if(c.resolution_ratio!=null)kv.push(['Resolution R',(+c.resolution_ratio).toFixed(2)]);
+    if(c.n_studies)kv.push(['Studies',c.n_studies]);
+    if(c.best_fidelity&&c.best_fidelity!=='none')kv.push(['Evidence fidelity',c.best_fidelity]);
+    if(kv.length)body+='<div class="kvs">'+kv.map(([k,v])=>`<div class="kv"><div class="k">${k}</div><div class="val">${v}</div></div>`).join('')+'</div>';
+    if(c.bases&&c.bases.length){
+      body+='<h3 class="sec">Evidence (the studies behind this grade)</h3><ul class="ev">'+
+        c.bases.map(b=>`<li>${b}</li>`).join('')+'</ul>';
+    }
+    const s=DATA.swc[c.claim];
+    if(s){
+      body+='<h3 class="sec">Benchmark for this metric</h3><div class="swcbox">';
+      body+= s.swc!=null?`Smallest worthwhile change: <b>${s.swc} ${s.unit||''}</b>. ${s.rationale||''}`
+                        :`No absolute smallest-worthwhile-change defined; graded on agreement coefficients. ${s.rationale||''}`;
+      if(s.criterion_ceiling)body+=`<div class="ceil">Criterion ceiling — ${s.criterion_ceiling}</div>`;
+      body+='</div>';
+    } else if(!cl.validatable){
+      body+='<h3 class="sec">Why N</h3><div class="swcbox">No external gold-standard exists for this composite score, so it has no measurement accuracy to assess — only whether it predicts real outcomes.</div>';
+    }
+    document.getElementById('dBody').innerHTML=body;
+    document.getElementById('drawer').classList.add('show');
+    document.getElementById('drawer').setAttribute('aria-hidden','false');
+    document.getElementById('scrim').classList.add('show');
+  }
+  function closeDrawer(){
+    document.getElementById('drawer').classList.remove('show');
+    document.getElementById('drawer').setAttribute('aria-hidden','true');
+    document.getElementById('scrim').classList.remove('show');
+    m.querySelectorAll('.sq.sel').forEach(x=>x.classList.remove('sel')); selected=null;
+  }
+  document.getElementById('drawerClose').onclick=closeDrawer;
+  document.getElementById('scrim').onclick=closeDrawer;
+
+  // ---- Filter (search + grade) ----
+  document.getElementById('q').addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();applyFilter();});
+  function applyFilter(){
+    const devMatch={},clMatch={};
+    DATA.devices.forEach(d=>devMatch[d.id]=!query||(d.label+' '+(d.vendor||'')).toLowerCase().includes(query));
+    DATA.claims.forEach(c=>clMatch[c.id]=!query||c.label.toLowerCase().includes(query));
+    m.querySelectorAll('.devhead').forEach(h=>h.classList.toggle('dim',!devMatch[h.dataset.device]));
+    m.querySelectorAll('.rowhead').forEach(h=>h.classList.toggle('dim',!clMatch[h.dataset.claim]));
+    m.querySelectorAll('td.cell').forEach(td=>{
+      const c=cellMap[td.dataset.device+'|'+td.dataset.claim];
+      const passQ=devMatch[td.dataset.device]&&clMatch[td.dataset.claim];
+      const passG=!c||active.has(c.grade);
+      td.classList.toggle('dim',!(passQ&&passG));
+    });
+  }
+
+  // ---- Modal + keyboard ----
+  const dlg=document.getElementById('method');
+  document.getElementById('methodBtn').onclick=()=>dlg.showModal();
+  document.getElementById('methodClose').onclick=()=>dlg.close();
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+})();
+</script>
+</body>
+</html>
